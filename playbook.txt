@@ -3363,3 +3363,94 @@ TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/c
 skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
 
 TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for https] ***
+changed: [localhost] => {"changed": true, "cmd": "cd \"/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../\"\necho \"---------------GIT PUSH---------------\"\ngit config user.email mramprasad.devops@gmail.com\ngit config user.name mramprasad-os\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git add -A .\n\n# To ignore a directory add it add reset path\nreset_path=platforms/hyperledger-indy/configuration\nif [ -n \"$reset_path\" ]; then\n    git --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git reset \"platforms/hyperledger-indy/configuration\"\nfi  \n\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git commit -s -m \"[ci skip] Pushing deployment file for storageclass\" || true\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git push https://mramprasad-os:Opensource1990@github.com/mramprasad-os/blockchain-automation-framework.git HEAD:develop\n", "delta": "0:00:03.086267", "end": "2021-06-09 15:22:49.471732", "rc": 0, "start": "2021-06-09 15:22:46.385465", "stderr": "To https://github.com/mramprasad-os/blockchain-automation-framework.git\n   a94d59a3..deee5d93  HEAD -> develop", "stderr_lines": ["To https://github.com/mramprasad-os/blockchain-automation-framework.git", "   a94d59a3..deee5d93  HEAD -> develop"], "stdout": "---------------GIT PUSH---------------\n[develop deee5d93] [ci skip] Pushing deployment file for storageclass\n 2 files changed, 101 insertions(+)\n create mode 100644 platforms/hyperledger-indy/releases/dev/provider/storage-class/azure-storageclass.yaml", "stdout_lines": ["---------------GIT PUSH---------------", "[develop deee5d93] [ci skip] Pushing deployment file for storageclass", " 2 files changed, 101 insertions(+)", " create mode 100644 platforms/hyperledger-indy/releases/dev/provider/storage-class/azure-storageclass.yaml"]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Output for SSH gitpush] ***
+skipping: [localhost] => {}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Error for SSH gitpush] ***
+skipping: [localhost] => {}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Output for gitpush] ***
+ok: [localhost] => {
+    "msg": [
+        "---------------GIT PUSH---------------",
+        "[develop deee5d93] [ci skip] Pushing deployment file for storageclass",
+        " 2 files changed, 101 insertions(+)",
+        " create mode 100644 platforms/hyperledger-indy/releases/dev/provider/storage-class/azure-storageclass.yaml"
+    ]
+}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Error for git_push] ***
+ok: [localhost] => {
+    "msg": [
+        "To https://github.com/mramprasad-os/blockchain-automation-framework.git",
+        "   a94d59a3..deee5d93  HEAD -> develop"
+    ]
+}
+
+TASK [Wait for Storageclass creation for provider-azure-storageclass] **********
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check StorageClass provider-azure-storageclass is created] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for StorageClass provider-azure-storageclass] ***
+FAILED - RETRYING: Wait for StorageClass provider-azure-storageclass (20 retries left).
+FAILED - RETRYING: Wait for StorageClass provider-azure-storageclass (19 retries left).
+FAILED - RETRYING: Wait for StorageClass provider-azure-storageclass (18 retries left).
+ok: [localhost] => {"api_found": true, "attempts": 4, "changed": false, "resources": [{"allowVolumeExpansion": true, "apiVersion": "storage.k8s.io/v1", "kind": "StorageClass", "metadata": {"annotations": {"fluxcd.io/sync-checksum": "871ffcb7c11d57f9610a80dc1abffe619e73f3f7", "kubectl.kubernetes.io/last-applied-configuration": "{\"allowVolumeExpansion\":true,\"apiVersion\":\"storage.k8s.io/v1\",\"kind\":\"StorageClass\",\"metadata\":{\"annotations\":{\"fluxcd.io/sync-checksum\":\"871ffcb7c11d57f9610a80dc1abffe619e73f3f7\"},\"labels\":{\"fluxcd.io/sync-gc-mark\":\"sha256.YqcHL_ljbUMq8Q4HuOMJ-3OUH-sKLoOUOBOOBNNKE_0\"},\"name\":\"provider-azure-storageclass\"},\"parameters\":{\"kind\":\"Managed\",\"storageaccounttype\":\"Premium_LRS\"},\"provisioner\":\"kubernetes.io/azure-disk\",\"reclaimPolicy\":\"Retain\"}\n"}, "creationTimestamp": "2021-06-09T15:24:31Z", "labels": {"fluxcd.io/sync-gc-mark": "sha256.YqcHL_ljbUMq8Q4HuOMJ-3OUH-sKLoOUOBOOBNNKE_0"}, "managedFields": [{"apiVersion": "storage.k8s.io/v1", "fieldsType": "FieldsV1", "fieldsV1": {"f:allowVolumeExpansion": {}, "f:metadata": {"f:annotations": {".": {}, "f:fluxcd.io/sync-checksum": {}, "f:kubectl.kubernetes.io/last-applied-configuration": {}}, "f:labels": {".": {}, "f:fluxcd.io/sync-gc-mark": {}}}, "f:parameters": {".": {}, "f:kind": {}, "f:storageaccounttype": {}}, "f:provisioner": {}, "f:reclaimPolicy": {}, "f:volumeBindingMode": {}}, "manager": "kubectl", "operation": "Update", "time": "2021-06-09T15:24:31Z"}], "name": "provider-azure-storageclass", "resourceVersion": "14839432", "selfLink": "/apis/storage.k8s.io/v1/storageclasses/provider-azure-storageclass", "uid": "b3813332-7643-474c-a0a6-703fd0fa2323"}, "parameters": {"kind": "Managed", "storageaccounttype": "Premium_LRS"}, "provisioner": "kubernetes.io/azure-disk", "reclaimPolicy": "Retain", "volumeBindingMode": "Immediate"}]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for StorageClass provider-azure-storageclass] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for StorageClass provider-azure-storageclass] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Check if storageclass exists] ********************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check StorageClass partner-azure-storageclass is created] ***
+ok: [localhost] => {"api_found": true, "changed": false, "resources": []}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for StorageClass partner-azure-storageclass] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for StorageClass partner-azure-storageclass] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for StorageClass partner-azure-storageclass] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/storageclass : Set Variable] **************************************
+ok: [localhost] => {"ansible_facts": {"storageclass_state": {"api_found": true, "changed": false, "failed": false, "resources": []}}, "changed": false}
+
+TASK [Create storageclass] *****************************************************
+
+TASK [Ensures storage-class dir exists] ****************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"exists": false}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+changed: [localhost] => {"changed": true, "gid": 1003, "group": "n474775", "mode": "0755", "owner": "n474775", "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/partner/storage-class", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/k8_component : create azure-storageclass file for storage-class] ***
+changed: [localhost] => {"changed": true, "checksum": "37eb480c18ba88f38dc2e9d0188128f12a4bae71", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/partner/storage-class/azure-storageclass.yaml", "gid": 1003, "group": "n474775", "md5sum": "6bca1ee9c2df284fa533337fde6ba2d3", "mode": "0664", "owner": "n474775", "size": 243, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623252280.3914845-1920-136147597279407/source", "state": "file", "uid": 1003}
+
+TASK [Push the created deployment files to repository] *************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Check if directory: /home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../ exists] ***
+ok: [localhost] => {"changed": false, "gid": 1003, "group": "n474775", "mode": "0775", "owner": "n474775", "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for ssh] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for https] ***
