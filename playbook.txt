@@ -1207,3 +1207,332 @@ TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/c
 skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
 
 TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for https] ***
+changed: [localhost] => {"changed": true, "cmd": "cd \"/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../\"\necho \"---------------GIT PUSH---------------\"\ngit config user.email mrampraad.devops@gmail.com\ngit config user.name mramprasad-os\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git add -A .\n\n# To ignore a directory add it add reset path\nreset_path=platforms/hyperledger-indy/configuration\nif [ -n \"$reset_path\" ]; then\n    git --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git reset \"platforms/hyperledger-indy/configuration\"\nfi  \n\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git commit -s -m \"[ci skip] Pushing deployment files for namespace\" || true\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git push https://mramprasad-os:Opensource1990@github.com/mramprasad-os/blockchain-automation-framework.git HEAD:develop\n", "delta": "0:00:02.705636", "end": "2021-06-09 15:15:03.094892", "rc": 0, "start": "2021-06-09 15:15:00.389256", "stderr": "To https://github.com/mramprasad-os/blockchain-automation-framework.git\n   c82c1ce7..b7def773  HEAD -> develop", "stderr_lines": ["To https://github.com/mramprasad-os/blockchain-automation-framework.git", "   c82c1ce7..b7def773  HEAD -> develop"], "stdout": "---------------GIT PUSH---------------\n[develop b7def773] [ci skip] Pushing deployment files for namespace\n 2 files changed, 78 insertions(+)\n create mode 100644 platforms/hyperledger-indy/releases/dev/partner/peer/namespace.yaml", "stdout_lines": ["---------------GIT PUSH---------------", "[develop b7def773] [ci skip] Pushing deployment files for namespace", " 2 files changed, 78 insertions(+)", " create mode 100644 platforms/hyperledger-indy/releases/dev/partner/peer/namespace.yaml"]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Output for SSH gitpush] ***
+skipping: [localhost] => {}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Error for SSH gitpush] ***
+skipping: [localhost] => {}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Output for gitpush] ***
+ok: [localhost] => {
+    "msg": [
+        "---------------GIT PUSH---------------",
+        "[develop b7def773] [ci skip] Pushing deployment files for namespace",
+        " 2 files changed, 78 insertions(+)",
+        " create mode 100644 platforms/hyperledger-indy/releases/dev/partner/peer/namespace.yaml"
+    ]
+}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Error for git_push] ***
+ok: [localhost] => {
+    "msg": [
+        "To https://github.com/mramprasad-os/blockchain-automation-framework.git",
+        "   c82c1ce7..b7def773  HEAD -> develop"
+    ]
+}
+
+TASK [Create service accounts] *************************************************
+
+TASK [Create service account for trustees [authority]] *************************
+
+TASK [Check if service account for authority-authority-trustee-vault-auth exists] ***
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check ServiceAccount authority-authority-trustee-vault-auth is created] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ServiceAccount authority-authority-trustee-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ServiceAccount authority-authority-trustee-vault-auth] ***
+ok: [localhost] => {"api_found": true, "changed": false, "resources": []}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ServiceAccount authority-authority-trustee-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/serviceaccount/by_identities : Set Variable] **********************
+ok: [localhost] => {"ansible_facts": {"serviceaccount_state": {"api_found": true, "changed": false, "failed": false, "resources": []}}, "changed": false}
+
+TASK [Create service account for authority-authority-trustee-vault-auth] *******
+
+TASK [Ensures authority-authority-trustee-vault-auth dir exists] ***************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"exists": false}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+changed: [localhost] => {"changed": true, "gid": 1003, "group": "n474775", "mode": "0755", "owner": "n474775", "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-authority-trustee-vault-auth", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/k8_component : create service-account file for authority-authority-trustee-vault-auth] ***
+changed: [localhost] => {"changed": true, "checksum": "0097e60d9e000fb7cbec7d4a160be6c1370f7c8e", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-authority-trustee-vault-auth/service-account.yaml", "gid": 1003, "group": "n474775", "md5sum": "f0b8d06765cfd8f1542681760bf7aeb1", "mode": "0664", "owner": "n474775", "size": 119, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623251705.6073744-26054-69678539699770/source", "state": "file", "uid": 1003}
+
+TASK [Check cluster role binding for authority-authority-trustee-vault-auth] ***
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check ClusterRoleBinding authority-authority-trustee-vault-auth is created] ***
+ok: [localhost] => {"api_found": true, "changed": false, "resources": []}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ClusterRoleBinding authority-authority-trustee-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ClusterRoleBinding authority-authority-trustee-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ClusterRoleBinding authority-authority-trustee-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/serviceaccount/by_identities : Set Variable] **********************
+ok: [localhost] => {"ansible_facts": {"clusterrolebinding_state": {"api_found": true, "changed": false, "failed": false, "resources": []}}, "changed": false}
+
+TASK [create/serviceaccount/by_identities : Get component_name to var] *********
+changed: [localhost] => {"changed": true, "cmd": "echo authority-authority-trustee-vault-auth", "delta": "0:00:00.004055", "end": "2021-06-09 15:15:07.419433", "rc": 0, "start": "2021-06-09 15:15:07.415378", "stderr": "", "stderr_lines": [], "stdout": "authority-authority-trustee-vault-auth", "stdout_lines": ["authority-authority-trustee-vault-auth"]}
+
+TASK [create/serviceaccount/by_identities : Get organization and admin string to var] ***
+changed: [localhost] => {"changed": true, "cmd": "echo authority-admin-vault-auth", "delta": "0:00:00.003728", "end": "2021-06-09 15:15:07.705291", "rc": 0, "start": "2021-06-09 15:15:07.701563", "stderr": "", "stderr_lines": [], "stdout": "authority-admin-vault-auth", "stdout_lines": ["authority-admin-vault-auth"]}
+
+TASK [Create cluster role binding for authority-authority-trustee-vault-auth] ***
+
+TASK [Ensures authority-authority-trustee-vault-auth dir exists] ***************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"atime": 1623251705.379035, "attr_flags": "e", "attributes": ["extents"], "block_size": 4096, "blocks": 8, "charset": "binary", "ctime": 1623251705.9830403, "dev": 2049, "device_type": 0, "executable": true, "exists": true, "gid": 1003, "gr_name": "n474775", "inode": 1553644, "isblk": false, "ischr": false, "isdir": true, "isfifo": false, "isgid": false, "islnk": false, "isreg": false, "issock": false, "isuid": false, "mimetype": "inode/directory", "mode": "0755", "mtime": 1623251705.9830403, "nlink": 2, "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-authority-trustee-vault-auth", "pw_name": "n474775", "readable": true, "rgrp": true, "roth": true, "rusr": true, "size": 4096, "uid": 1003, "version": "4092295123", "wgrp": false, "woth": false, "writeable": true, "wusr": true, "xgrp": true, "xoth": true, "xusr": true}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/k8_component : create cluster-role-binding file for authority-authority-trustee-vault-auth] ***
+changed: [localhost] => {"changed": true, "checksum": "8a7bbf09bfb822a3ca353cfac5f4c00c30ed4d8b", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-authority-trustee-vault-auth/cluster-role-binding.yaml", "gid": 1003, "group": "n474775", "md5sum": "8a32e7c9bf6c528a483bd370f11bcb77", "mode": "0664", "owner": "n474775", "size": 408, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623251708.374909-26244-263523334378579/source", "state": "file", "uid": 1003}
+
+TASK [Create admin cluster role binding for authority-authority-trustee-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Create service account for stewards [authority]] *************************
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Create service account for endorsers [authority]] ************************
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Create service account for organization [authority]] *********************
+
+TASK [Check if service account for authority-admin-vault-auth exists] **********
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check ServiceAccount authority-admin-vault-auth is created] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ServiceAccount authority-admin-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ServiceAccount authority-admin-vault-auth] ***
+ok: [localhost] => {"api_found": true, "changed": false, "resources": []}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ServiceAccount authority-admin-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/serviceaccount/by_identities : Set Variable] **********************
+ok: [localhost] => {"ansible_facts": {"serviceaccount_state": {"api_found": true, "changed": false, "failed": false, "resources": []}}, "changed": false}
+
+TASK [Create service account for authority-admin-vault-auth] *******************
+
+TASK [Ensures authority-admin-vault-auth dir exists] ***************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"exists": false}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+changed: [localhost] => {"changed": true, "gid": 1003, "group": "n474775", "mode": "0755", "owner": "n474775", "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-admin-vault-auth", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/k8_component : create service-account file for authority-admin-vault-auth] ***
+changed: [localhost] => {"changed": true, "checksum": "fc5aea2548c63fa12a7d086ccbabe4ff9796e554", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-admin-vault-auth/service-account.yaml", "gid": 1003, "group": "n474775", "md5sum": "162efd5f00d74684fd604fe20d35f2a0", "mode": "0664", "owner": "n474775", "size": 107, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623251711.0648513-26399-159454645746481/source", "state": "file", "uid": 1003}
+
+TASK [Check cluster role binding for authority-admin-vault-auth] ***************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check ClusterRoleBinding authority-admin-vault-auth is created] ***
+ok: [localhost] => {"api_found": true, "changed": false, "resources": []}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ClusterRoleBinding authority-admin-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ClusterRoleBinding authority-admin-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ClusterRoleBinding authority-admin-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/serviceaccount/by_identities : Set Variable] **********************
+ok: [localhost] => {"ansible_facts": {"clusterrolebinding_state": {"api_found": true, "changed": false, "failed": false, "resources": []}}, "changed": false}
+
+TASK [create/serviceaccount/by_identities : Get component_name to var] *********
+changed: [localhost] => {"changed": true, "cmd": "echo authority-admin-vault-auth", "delta": "0:00:00.003590", "end": "2021-06-09 15:15:12.851224", "rc": 0, "start": "2021-06-09 15:15:12.847634", "stderr": "", "stderr_lines": [], "stdout": "authority-admin-vault-auth", "stdout_lines": ["authority-admin-vault-auth"]}
+
+TASK [create/serviceaccount/by_identities : Get organization and admin string to var] ***
+changed: [localhost] => {"changed": true, "cmd": "echo authority-admin-vault-auth", "delta": "0:00:00.003468", "end": "2021-06-09 15:15:13.106935", "rc": 0, "start": "2021-06-09 15:15:13.103467", "stderr": "", "stderr_lines": [], "stdout": "authority-admin-vault-auth", "stdout_lines": ["authority-admin-vault-auth"]}
+
+TASK [Create cluster role binding for authority-admin-vault-auth] **************
+
+TASK [Ensures authority-admin-vault-auth dir exists] ***************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"atime": 1623251710.8270836, "attr_flags": "e", "attributes": ["extents"], "block_size": 4096, "blocks": 8, "charset": "binary", "ctime": 1623251711.455089, "dev": 2049, "device_type": 0, "executable": true, "exists": true, "gid": 1003, "gr_name": "n474775", "inode": 1553649, "isblk": false, "ischr": false, "isdir": true, "isfifo": false, "isgid": false, "islnk": false, "isreg": false, "issock": false, "isuid": false, "mimetype": "inode/directory", "mode": "0755", "mtime": 1623251711.455089, "nlink": 2, "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-admin-vault-auth", "pw_name": "n474775", "readable": true, "rgrp": true, "roth": true, "rusr": true, "size": 4096, "uid": 1003, "version": "1832135852", "wgrp": false, "woth": false, "writeable": true, "wusr": true, "xgrp": true, "xoth": true, "xusr": true}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/k8_component : create cluster-role-binding file for authority-admin-vault-auth] ***
+changed: [localhost] => {"changed": true, "checksum": "782519b8d3205d7961bc4490507a9f28cc0887d3", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-admin-vault-auth/cluster-role-binding.yaml", "gid": 1003, "group": "n474775", "md5sum": "164b7cf6505a0f262d6bc0a94159e89b", "mode": "0664", "owner": "n474775", "size": 384, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623251713.823701-26578-268394496957429/source", "state": "file", "uid": 1003}
+
+TASK [Create admin cluster role binding for authority-admin-vault-auth] ********
+
+TASK [Ensures authority-admin-vault-auth dir exists] ***************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"atime": 1623251710.8270836, "attr_flags": "e", "attributes": ["extents"], "block_size": 4096, "blocks": 8, "charset": "binary", "ctime": 1623251714.2191138, "dev": 2049, "device_type": 0, "executable": true, "exists": true, "gid": 1003, "gr_name": "n474775", "inode": 1553649, "isblk": false, "ischr": false, "isdir": true, "isfifo": false, "isgid": false, "islnk": false, "isreg": false, "issock": false, "isuid": false, "mimetype": "inode/directory", "mode": "0755", "mtime": 1623251714.2191138, "nlink": 2, "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-admin-vault-auth", "pw_name": "n474775", "readable": true, "rgrp": true, "roth": true, "rusr": true, "size": 4096, "uid": 1003, "version": "1832135852", "wgrp": false, "woth": false, "writeable": true, "wusr": true, "xgrp": true, "xoth": true, "xusr": true}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/k8_component : create admin-cluster-role-binding file for authority-admin-vault-auth] ***
+changed: [localhost] => {"changed": true, "checksum": "2388c964b3ed3a8a2d9f0830e2e39f624d5c8ab8", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-admin-vault-auth/admin-cluster-role-binding.yaml", "gid": 1003, "group": "n474775", "md5sum": "90c86885c11a0b2477e063b4be0a9092", "mode": "0664", "owner": "n474775", "size": 390, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623251714.937534-26661-69607881859717/source", "state": "file", "uid": 1003}
+
+TASK [Create service account for read only public crypto [authority]] **********
+
+TASK [Check if service account for authority-baf-ac-vault-auth exists] *********
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check ServiceAccount authority-baf-ac-vault-auth is created] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ServiceAccount authority-baf-ac-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ServiceAccount authority-baf-ac-vault-auth] ***
+ok: [localhost] => {"api_found": true, "changed": false, "resources": []}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ServiceAccount authority-baf-ac-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/serviceaccount/by_identities : Set Variable] **********************
+ok: [localhost] => {"ansible_facts": {"serviceaccount_state": {"api_found": true, "changed": false, "failed": false, "resources": []}}, "changed": false}
+
+TASK [Create service account for authority-baf-ac-vault-auth] ******************
+
+TASK [Ensures authority-baf-ac-vault-auth dir exists] **************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"exists": false}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+changed: [localhost] => {"changed": true, "gid": 1003, "group": "n474775", "mode": "0755", "owner": "n474775", "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-baf-ac-vault-auth", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/k8_component : create service-account file for authority-baf-ac-vault-auth] ***
+changed: [localhost] => {"changed": true, "checksum": "88dc0b0aa4295950f6b571d0f0e824d275615bc8", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-baf-ac-vault-auth/service-account.yaml", "gid": 1003, "group": "n474775", "md5sum": "4e0af28988dd6b898304e13b8bb0c741", "mode": "0664", "owner": "n474775", "size": 108, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623251717.474787-26809-11995141573516/source", "state": "file", "uid": 1003}
+
+TASK [Check cluster role binding for authority-baf-ac-vault-auth] **************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check ClusterRoleBinding authority-baf-ac-vault-auth is created] ***
+ok: [localhost] => {"api_found": true, "changed": false, "resources": []}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ClusterRoleBinding authority-baf-ac-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ClusterRoleBinding authority-baf-ac-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for ClusterRoleBinding authority-baf-ac-vault-auth] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/serviceaccount/by_identities : Set Variable] **********************
+ok: [localhost] => {"ansible_facts": {"clusterrolebinding_state": {"api_found": true, "changed": false, "failed": false, "resources": []}}, "changed": false}
+
+TASK [create/serviceaccount/by_identities : Get component_name to var] *********
+changed: [localhost] => {"changed": true, "cmd": "echo authority-baf-ac-vault-auth", "delta": "0:00:00.003069", "end": "2021-06-09 15:15:19.585588", "rc": 0, "start": "2021-06-09 15:15:19.582519", "stderr": "", "stderr_lines": [], "stdout": "authority-baf-ac-vault-auth", "stdout_lines": ["authority-baf-ac-vault-auth"]}
+
+TASK [create/serviceaccount/by_identities : Get organization and admin string to var] ***
+changed: [localhost] => {"changed": true, "cmd": "echo authority-admin-vault-auth", "delta": "0:00:00.003082", "end": "2021-06-09 15:15:19.922094", "rc": 0, "start": "2021-06-09 15:15:19.919012", "stderr": "", "stderr_lines": [], "stdout": "authority-admin-vault-auth", "stdout_lines": ["authority-admin-vault-auth"]}
+
+TASK [Create cluster role binding for authority-baf-ac-vault-auth] *************
+
+TASK [Ensures authority-baf-ac-vault-auth dir exists] **************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"atime": 1623251717.2471406, "attr_flags": "e", "attributes": ["extents"], "block_size": 4096, "blocks": 8, "charset": "binary", "ctime": 1623251717.859146, "dev": 2049, "device_type": 0, "executable": true, "exists": true, "gid": 1003, "gr_name": "n474775", "inode": 1553650, "isblk": false, "ischr": false, "isdir": true, "isfifo": false, "isgid": false, "islnk": false, "isreg": false, "issock": false, "isuid": false, "mimetype": "inode/directory", "mode": "0755", "mtime": 1623251717.859146, "nlink": 2, "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-baf-ac-vault-auth", "pw_name": "n474775", "readable": true, "rgrp": true, "roth": true, "rusr": true, "size": 4096, "uid": 1003, "version": "3142484257", "wgrp": false, "woth": false, "writeable": true, "wusr": true, "xgrp": true, "xoth": true, "xusr": true}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/k8_component : create cluster-role-binding file for authority-baf-ac-vault-auth] ***
+changed: [localhost] => {"changed": true, "checksum": "cf850f99c95c832ba3013cc143d53a04ccf22e36", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/authority-baf-ac-vault-auth/cluster-role-binding.yaml", "gid": 1003, "group": "n474775", "md5sum": "1c2cfa6f7ed2a30044ae911e91daf5e1", "mode": "0664", "owner": "n474775", "size": 386, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623251720.6429825-26993-62429814560206/source", "state": "file", "uid": 1003}
+
+TASK [Create admin cluster role binding for authority-baf-ac-vault-auth] *******
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Push the created deployment files to repository] *************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Check if directory: /home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../ exists] ***
+ok: [localhost] => {"changed": false, "gid": 1003, "group": "n474775", "mode": "0775", "owner": "n474775", "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for ssh] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for https] ***
