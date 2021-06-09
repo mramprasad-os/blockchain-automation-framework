@@ -1133,3 +1133,77 @@ TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/c
 skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
 
 TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for https] ***
+changed: [localhost] => {"changed": true, "cmd": "cd \"/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../\"\necho \"---------------GIT PUSH---------------\"\ngit config user.email mramprasad.devops@gmail.com\ngit config user.name mramprasad-os\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git add -A .\n\n# To ignore a directory add it add reset path\nreset_path=platforms/hyperledger-indy/configuration\nif [ -n \"$reset_path\" ]; then\n    git --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git reset \"platforms/hyperledger-indy/configuration\"\nfi  \n\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git commit -s -m \"[ci skip] Pushing deployment files for namespace\" || true\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git push https://mramprasad-os:Opensource1990@github.com/mramprasad-os/blockchain-automation-framework.git HEAD:develop\n", "delta": "0:00:02.741540", "end": "2021-06-09 15:14:57.205217", "rc": 0, "start": "2021-06-09 15:14:54.463677", "stderr": "To https://github.com/mramprasad-os/blockchain-automation-framework.git\n   5d241cc6..c82c1ce7  HEAD -> develop", "stderr_lines": ["To https://github.com/mramprasad-os/blockchain-automation-framework.git", "   5d241cc6..c82c1ce7  HEAD -> develop"], "stdout": "---------------GIT PUSH---------------\n[develop c82c1ce7] [ci skip] Pushing deployment files for namespace\n 2 files changed, 79 insertions(+)\n create mode 100644 platforms/hyperledger-indy/releases/dev/provider/peer/namespace.yaml", "stdout_lines": ["---------------GIT PUSH---------------", "[develop c82c1ce7] [ci skip] Pushing deployment files for namespace", " 2 files changed, 79 insertions(+)", " create mode 100644 platforms/hyperledger-indy/releases/dev/provider/peer/namespace.yaml"]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Output for SSH gitpush] ***
+skipping: [localhost] => {}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Error for SSH gitpush] ***
+skipping: [localhost] => {}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Output for gitpush] ***
+ok: [localhost] => {
+    "msg": [
+        "---------------GIT PUSH---------------",
+        "[develop c82c1ce7] [ci skip] Pushing deployment files for namespace",
+        " 2 files changed, 79 insertions(+)",
+        " create mode 100644 platforms/hyperledger-indy/releases/dev/provider/peer/namespace.yaml"
+    ]
+}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Error for git_push] ***
+ok: [localhost] => {
+    "msg": [
+        "To https://github.com/mramprasad-os/blockchain-automation-framework.git",
+        "   5d241cc6..c82c1ce7  HEAD -> develop"
+    ]
+}
+
+TASK [Check namespace is created] **********************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check Namespace partner-ns is created] ***
+ok: [localhost] => {"api_found": true, "changed": false, "resources": []}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace partner-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace partner-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace partner-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/namespace : Set Variable] *****************************************
+ok: [localhost] => {"ansible_facts": {"get_namespace": {"api_found": true, "changed": false, "failed": false, "resources": []}}, "changed": false}
+
+TASK [Create namespaces] *******************************************************
+
+TASK [Ensures peer dir exists] *************************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"exists": false}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+changed: [localhost] => {"changed": true, "gid": 1003, "group": "n474775", "mode": "0755", "owner": "n474775", "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/partner/peer", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/k8_component : create namespace file for peer] ********************
+changed: [localhost] => {"changed": true, "checksum": "96251faf474fd3fa758c30803f112eceeaf36b74", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/partner/peer/namespace.yaml", "gid": 1003, "group": "n474775", "md5sum": "a313c1a4c8cc3546455889d622d787bb", "mode": "0664", "owner": "n474775", "size": 60, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623251699.358704-25808-165385856219604/source", "state": "file", "uid": 1003}
+
+TASK [Git Push] ****************************************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Check if directory: /home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../ exists] ***
+ok: [localhost] => {"changed": false, "gid": 1003, "group": "n474775", "mode": "0775", "owner": "n474775", "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for ssh] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for https] ***
