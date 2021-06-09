@@ -3454,3 +3454,351 @@ TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/c
 skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
 
 TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for https] ***
+changed: [localhost] => {"changed": true, "cmd": "cd \"/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../\"\necho \"---------------GIT PUSH---------------\"\ngit config user.email mrampraad.devops@gmail.com\ngit config user.name mramprasad-os\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git add -A .\n\n# To ignore a directory add it add reset path\nreset_path=platforms/hyperledger-indy/configuration\nif [ -n \"$reset_path\" ]; then\n    git --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git reset \"platforms/hyperledger-indy/configuration\"\nfi  \n\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git commit -s -m \"[ci skip] Pushing deployment file for storageclass\" || true\ngit --git-dir=/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../..//.git push https://mramprasad-os:Opensource1990@github.com/mramprasad-os/blockchain-automation-framework.git HEAD:develop\n", "delta": "0:00:02.739453", "end": "2021-06-09 15:24:44.170942", "rc": 0, "start": "2021-06-09 15:24:41.431489", "stderr": "To https://github.com/mramprasad-os/blockchain-automation-framework.git\n   deee5d93..2bcc5a61  HEAD -> develop", "stderr_lines": ["To https://github.com/mramprasad-os/blockchain-automation-framework.git", "   deee5d93..2bcc5a61  HEAD -> develop"], "stdout": "---------------GIT PUSH---------------\n[develop 2bcc5a61] [ci skip] Pushing deployment file for storageclass\n 2 files changed, 101 insertions(+)\n create mode 100644 platforms/hyperledger-indy/releases/dev/partner/storage-class/azure-storageclass.yaml", "stdout_lines": ["---------------GIT PUSH---------------", "[develop 2bcc5a61] [ci skip] Pushing deployment file for storageclass", " 2 files changed, 101 insertions(+)", " create mode 100644 platforms/hyperledger-indy/releases/dev/partner/storage-class/azure-storageclass.yaml"]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Output for SSH gitpush] ***
+skipping: [localhost] => {}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Error for SSH gitpush] ***
+skipping: [localhost] => {}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Output for gitpush] ***
+ok: [localhost] => {
+    "msg": [
+        "---------------GIT PUSH---------------",
+        "[develop 2bcc5a61] [ci skip] Pushing deployment file for storageclass",
+        " 2 files changed, 101 insertions(+)",
+        " create mode 100644 platforms/hyperledger-indy/releases/dev/partner/storage-class/azure-storageclass.yaml"
+    ]
+}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Error for git_push] ***
+ok: [localhost] => {
+    "msg": [
+        "To https://github.com/mramprasad-os/blockchain-automation-framework.git",
+        "   deee5d93..2bcc5a61  HEAD -> develop"
+    ]
+}
+
+TASK [Wait for Storageclass creation for partner-azure-storageclass] ***********
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check StorageClass partner-azure-storageclass is created] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for StorageClass partner-azure-storageclass] ***
+FAILED - RETRYING: Wait for StorageClass partner-azure-storageclass (20 retries left).
+FAILED - RETRYING: Wait for StorageClass partner-azure-storageclass (19 retries left).
+FAILED - RETRYING: Wait for StorageClass partner-azure-storageclass (18 retries left).
+FAILED - RETRYING: Wait for StorageClass partner-azure-storageclass (17 retries left).
+ok: [localhost] => {"api_found": true, "attempts": 5, "changed": false, "resources": [{"allowVolumeExpansion": true, "apiVersion": "storage.k8s.io/v1", "kind": "StorageClass", "metadata": {"annotations": {"fluxcd.io/sync-checksum": "9b89962ebf79192dba0fb6706bd4d856dc7e1b32", "kubectl.kubernetes.io/last-applied-configuration": "{\"allowVolumeExpansion\":true,\"apiVersion\":\"storage.k8s.io/v1\",\"kind\":\"StorageClass\",\"metadata\":{\"annotations\":{\"fluxcd.io/sync-checksum\":\"9b89962ebf79192dba0fb6706bd4d856dc7e1b32\"},\"labels\":{\"fluxcd.io/sync-gc-mark\":\"sha256.Np0KAxFKPn8VZ30E7HZLDYPp5ZJJuBAwWDfzRtL3CvY\"},\"name\":\"partner-azure-storageclass\"},\"parameters\":{\"kind\":\"Managed\",\"storageaccounttype\":\"Premium_LRS\"},\"provisioner\":\"kubernetes.io/azure-disk\",\"reclaimPolicy\":\"Retain\"}\n"}, "creationTimestamp": "2021-06-09T15:26:33Z", "labels": {"fluxcd.io/sync-gc-mark": "sha256.Np0KAxFKPn8VZ30E7HZLDYPp5ZJJuBAwWDfzRtL3CvY"}, "managedFields": [{"apiVersion": "storage.k8s.io/v1", "fieldsType": "FieldsV1", "fieldsV1": {"f:allowVolumeExpansion": {}, "f:metadata": {"f:annotations": {".": {}, "f:fluxcd.io/sync-checksum": {}, "f:kubectl.kubernetes.io/last-applied-configuration": {}}, "f:labels": {".": {}, "f:fluxcd.io/sync-gc-mark": {}}}, "f:parameters": {".": {}, "f:kind": {}, "f:storageaccounttype": {}}, "f:provisioner": {}, "f:reclaimPolicy": {}, "f:volumeBindingMode": {}}, "manager": "kubectl", "operation": "Update", "time": "2021-06-09T15:26:33Z"}], "name": "partner-azure-storageclass", "resourceVersion": "14839726", "selfLink": "/apis/storage.k8s.io/v1/storageclasses/partner-azure-storageclass", "uid": "a55f59fa-3f12-427c-9091-966d136bcb0a"}, "parameters": {"kind": "Managed", "storageaccounttype": "Premium_LRS"}, "provisioner": "kubernetes.io/azure-disk", "reclaimPolicy": "Retain", "volumeBindingMode": "Immediate"}]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for StorageClass partner-azure-storageclass] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for StorageClass partner-azure-storageclass] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Admin K8S auth] **********************************************************
+
+TASK [Check namespace is created] **********************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check Namespace authority-ns is created] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace authority-ns] ***
+ok: [localhost] => {"api_found": true, "attempts": 1, "changed": false, "resources": [{"apiVersion": "v1", "kind": "Namespace", "metadata": {"annotations": {"fluxcd.io/sync-checksum": "19274246586dfccfe49a9208031580e13243e99f", "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{\"fluxcd.io/sync-checksum\":\"19274246586dfccfe49a9208031580e13243e99f\"},\"labels\":{\"fluxcd.io/sync-gc-mark\":\"sha256.SCcbQs8H0fwWD3Y1T_Xek08a2vzBU-CzbhJ0wQD3zI8\"},\"name\":\"authority-ns\"}}\n"}, "creationTimestamp": "2021-06-09T15:16:31Z", "labels": {"fluxcd.io/sync-gc-mark": "sha256.SCcbQs8H0fwWD3Y1T_Xek08a2vzBU-CzbhJ0wQD3zI8"}, "managedFields": [{"apiVersion": "v1", "fieldsType": "FieldsV1", "fieldsV1": {"f:metadata": {"f:annotations": {".": {}, "f:fluxcd.io/sync-checksum": {}, "f:kubectl.kubernetes.io/last-applied-configuration": {}}, "f:labels": {".": {}, "f:fluxcd.io/sync-gc-mark": {}}}, "f:status": {"f:phase": {}}}, "manager": "kubectl", "operation": "Update", "time": "2021-06-09T15:16:31Z"}], "name": "authority-ns", "resourceVersion": "14838217", "selfLink": "/api/v1/namespaces/authority-ns", "uid": "968755c9-513c-4277-8907-71788a6d4afa"}, "spec": {"finalizers": ["kubernetes"]}, "status": {"phase": "Active"}}]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace authority-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace authority-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Ensures build dir exists] ************************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"exists": false}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+changed: [localhost] => {"changed": true, "gid": 1003, "group": "n474775", "mode": "0755", "owner": "n474775", "path": "./build", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Check if Kubernetes-auth already created for Organization] ***************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+changed: [localhost] => {"changed": true, "cmd": "vault auth list --format json | jq \"to_entries[] | select(.value.restricted|not) | .key\"\n", "delta": "0:00:00.080151", "end": "2021-06-09 15:27:11.556245", "rc": 0, "start": "2021-06-09 15:27:11.476094", "stderr": "", "stderr_lines": [], "stdout": "\"approle/\"\n\"token/\"", "stdout_lines": ["\"approle/\"", "\"token/\""]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [setup/vault_kubernetes : Set the result of vault auth check to a local variable] ***
+ok: [localhost] => {"ansible_facts": {"auth_list": {"changed": true, "cmd": "vault auth list --format json | jq \"to_entries[] | select(.value.restricted|not) | .key\"\n", "delta": "0:00:00.080151", "end": "2021-06-09 15:27:11.556245", "failed": false, "rc": 0, "start": "2021-06-09 15:27:11.476094", "stderr": "", "stderr_lines": [], "stdout": "\"approle/\"\n\"token/\"", "stdout_lines": ["\"approle/\"", "\"token/\""]}}, "changed": false}
+
+TASK [setup/vault_kubernetes : set_fact] ***************************************
+ok: [localhost] => {"ansible_facts": {"component_auth_temp": "\"kubernetes-authority-admin-auth/\"", "vault_auth_status": false}, "changed": false}
+
+TASK [setup/vault_kubernetes : set_fact] ***************************************
+skipping: [localhost] => (item="approle/")  => {"ansible_loop_var": "item", "changed": false, "item": "\"approle/\"", "skip_reason": "Conditional result was False"}
+skipping: [localhost] => (item="token/")  => {"ansible_loop_var": "item", "changed": false, "item": "\"token/\"", "skip_reason": "Conditional result was False"}
+
+TASK [setup/vault_kubernetes : Enable and configure Kubernetes-auth for Organization] ***
+changed: [localhost] => {"changed": true, "cmd": "vault auth enable --path=\"kubernetes-authority-admin-auth\" kubernetes\n", "delta": "0:00:00.079837", "end": "2021-06-09 15:27:12.137535", "rc": 0, "start": "2021-06-09 15:27:12.057698", "stderr": "", "stderr_lines": [], "stdout": "Success! Enabled kubernetes auth method at: kubernetes-authority-admin-auth/", "stdout_lines": ["Success! Enabled kubernetes auth method at: kubernetes-authority-admin-auth/"]}
+
+TASK [setup/vault_kubernetes : Get Kubernetes cert files for organizations] ****
+changed: [localhost] => {"changed": true, "cmd": "KUBECONFIG=/home/n474775/.kube/config kubectl get secrets $(KUBECONFIG=/home/n474775/.kube/config kubectl get secrets | grep \"default\" | awk '{print $1}') -o jsonpath=\"{.data['ca\\.crt']}\" | base64 -d > \"./build/authority.ca.cert\"\n", "delta": "0:00:00.999317", "end": "2021-06-09 15:27:13.398193", "rc": 0, "start": "2021-06-09 15:27:12.398876", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+TASK [setup/vault_kubernetes : Write reviewer token for Organizations] *********
+changed: [localhost] => {"changed": true, "cmd": "export REVIEWER_TOKEN=$(KUBECONFIG=/home/n474775/.kube/config kubectl get secret $(KUBECONFIG=/home/n474775/.kube/config kubectl get serviceaccount authority-admin-vault-auth -n authority-ns -o jsonpath={.secrets[0].name}) -n authority-ns -o  jsonpath={.data.token} | base64 -d)\nvault write auth/kubernetes-authority-admin-auth/config token_reviewer_jwt=\"$REVIEWER_TOKEN\" kubernetes_host=\"$(KUBECONFIG=/home/n474775/.kube/config kubectl config view --minify | grep server | cut -f 2- -d \":\" | tr -d \" \")\" kubernetes_ca_cert=@\"./build/authority.ca.cert\"\n", "delta": "0:00:00.359543", "end": "2021-06-09 15:27:14.024741", "rc": 0, "start": "2021-06-09 15:27:13.665198", "stderr": "", "stderr_lines": [], "stdout": "Success! Data written to: auth/kubernetes-authority-admin-auth/config", "stdout_lines": ["Success! Data written to: auth/kubernetes-authority-admin-auth/config"]}
+
+TASK [setup/vault_kubernetes : Check if policy exists] *************************
+fatal: [localhost]: FAILED! => {"changed": true, "cmd": "vault policy read authority-admin-rw\n", "delta": "0:00:00.082328", "end": "2021-06-09 15:27:14.371173", "msg": "non-zero return code", "rc": 2, "start": "2021-06-09 15:27:14.288845", "stderr": "No policy named: authority-admin-rw", "stderr_lines": ["No policy named: authority-admin-rw"], "stdout": "", "stdout_lines": []}
+...ignoring
+
+TASK [setup/vault_kubernetes : Create policy for Access Control] ***************
+changed: [localhost] => {"changed": true, "checksum": "ee4bd63cb0c1845e9048814ed9131547e7477423", "dest": "./build/authority-admin-rw.hcl", "gid": 1003, "group": "n474775", "md5sum": "d5c1df14370d6b8a72907b38e0bc1147", "mode": "0664", "owner": "n474775", "size": 90, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623252434.4544184-2712-231127902638994/source", "state": "file", "uid": 1003}
+
+TASK [setup/vault_kubernetes : Write Policy to Vault] **************************
+changed: [localhost] => {"changed": true, "cmd": "vault write sys/policy/authority-admin-rw policy=\"@./build/authority-admin-rw.hcl\"\n", "delta": "0:00:00.086166", "end": "2021-06-09 15:27:15.197357", "rc": 0, "start": "2021-06-09 15:27:15.111191", "stderr": "", "stderr_lines": [], "stdout": "Success! Data written to: sys/policy/authority-admin-rw", "stdout_lines": ["Success! Data written to: sys/policy/authority-admin-rw"]}
+
+TASK [setup/vault_kubernetes : Create Vault auth role] *************************
+changed: [localhost] => {"changed": true, "cmd": "vault write auth/kubernetes-authority-admin-auth/role/rw bound_service_account_names=authority-admin-vault-auth bound_service_account_namespaces=authority-ns policies=\"authority-admin-rw\" ttl=600s\n", "delta": "0:00:00.078856", "end": "2021-06-09 15:27:15.534745", "rc": 0, "start": "2021-06-09 15:27:15.455889", "stderr": "", "stderr_lines": [], "stdout": "Success! Data written to: auth/kubernetes-authority-admin-auth/role/rw", "stdout_lines": ["Success! Data written to: auth/kubernetes-authority-admin-auth/role/rw"]}
+
+TASK [Check namespace is created] **********************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check Namespace provider-ns is created] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace provider-ns] ***
+ok: [localhost] => {"api_found": true, "attempts": 1, "changed": false, "resources": [{"apiVersion": "v1", "kind": "Namespace", "metadata": {"annotations": {"fluxcd.io/sync-checksum": "a55dd31de29be728a8e15155fa184efc41fc9a03", "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{\"fluxcd.io/sync-checksum\":\"a55dd31de29be728a8e15155fa184efc41fc9a03\"},\"labels\":{\"fluxcd.io/sync-gc-mark\":\"sha256.VHtzLwPkHnVCUY4OJo1zYqkSCUuwY-dgHHLzvPhyzJE\"},\"name\":\"provider-ns\"}}\n"}, "creationTimestamp": "2021-06-09T15:16:31Z", "labels": {"fluxcd.io/sync-gc-mark": "sha256.VHtzLwPkHnVCUY4OJo1zYqkSCUuwY-dgHHLzvPhyzJE"}, "managedFields": [{"apiVersion": "v1", "fieldsType": "FieldsV1", "fieldsV1": {"f:metadata": {"f:annotations": {".": {}, "f:fluxcd.io/sync-checksum": {}, "f:kubectl.kubernetes.io/last-applied-configuration": {}}, "f:labels": {".": {}, "f:fluxcd.io/sync-gc-mark": {}}}, "f:status": {"f:phase": {}}}, "manager": "kubectl", "operation": "Update", "time": "2021-06-09T15:16:31Z"}], "name": "provider-ns", "resourceVersion": "14838221", "selfLink": "/api/v1/namespaces/provider-ns", "uid": "f1be946e-b948-48e2-ad98-fb90de9f94a0"}, "spec": {"finalizers": ["kubernetes"]}, "status": {"phase": "Active"}}]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace provider-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace provider-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Ensures build dir exists] ************************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"atime": 1623252430.9018667, "attr_flags": "e", "attributes": ["extents"], "block_size": 4096, "blocks": 8, "charset": "binary", "ctime": 1623252434.8419077, "dev": 2049, "device_type": 0, "executable": true, "exists": true, "gid": 1003, "gr_name": "n474775", "inode": 1553708, "isblk": false, "ischr": false, "isdir": true, "isfifo": false, "isgid": false, "islnk": false, "isreg": false, "issock": false, "isuid": false, "mimetype": "inode/directory", "mode": "0755", "mtime": 1623252434.8419077, "nlink": 2, "path": "./build", "pw_name": "n474775", "readable": true, "rgrp": true, "roth": true, "rusr": true, "size": 4096, "uid": 1003, "version": "2741028404", "wgrp": false, "woth": false, "writeable": true, "wusr": true, "xgrp": true, "xoth": true, "xusr": true}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Check if Kubernetes-auth already created for Organization] ***************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+changed: [localhost] => {"changed": true, "cmd": "vault auth list --format json | jq \"to_entries[] | select(.value.restricted|not) | .key\"\n", "delta": "0:00:00.083043", "end": "2021-06-09 15:27:17.573729", "rc": 0, "start": "2021-06-09 15:27:17.490686", "stderr": "", "stderr_lines": [], "stdout": "\"approle/\"\n\"kubernetes-authority-admin-auth/\"\n\"token/\"", "stdout_lines": ["\"approle/\"", "\"kubernetes-authority-admin-auth/\"", "\"token/\""]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [setup/vault_kubernetes : Set the result of vault auth check to a local variable] ***
+ok: [localhost] => {"ansible_facts": {"auth_list": {"changed": true, "cmd": "vault auth list --format json | jq \"to_entries[] | select(.value.restricted|not) | .key\"\n", "delta": "0:00:00.083043", "end": "2021-06-09 15:27:17.573729", "failed": false, "rc": 0, "start": "2021-06-09 15:27:17.490686", "stderr": "", "stderr_lines": [], "stdout": "\"approle/\"\n\"kubernetes-authority-admin-auth/\"\n\"token/\"", "stdout_lines": ["\"approle/\"", "\"kubernetes-authority-admin-auth/\"", "\"token/\""]}}, "changed": false}
+
+TASK [setup/vault_kubernetes : set_fact] ***************************************
+ok: [localhost] => {"ansible_facts": {"component_auth_temp": "\"kubernetes-provider-admin-auth/\"", "vault_auth_status": false}, "changed": false}
+
+TASK [setup/vault_kubernetes : set_fact] ***************************************
+skipping: [localhost] => (item="approle/")  => {"ansible_loop_var": "item", "changed": false, "item": "\"approle/\"", "skip_reason": "Conditional result was False"}
+skipping: [localhost] => (item="kubernetes-authority-admin-auth/")  => {"ansible_loop_var": "item", "changed": false, "item": "\"kubernetes-authority-admin-auth/\"", "skip_reason": "Conditional result was False"}
+skipping: [localhost] => (item="token/")  => {"ansible_loop_var": "item", "changed": false, "item": "\"token/\"", "skip_reason": "Conditional result was False"}
+
+TASK [setup/vault_kubernetes : Enable and configure Kubernetes-auth for Organization] ***
+changed: [localhost] => {"changed": true, "cmd": "vault auth enable --path=\"kubernetes-provider-admin-auth\" kubernetes\n", "delta": "0:00:00.080279", "end": "2021-06-09 15:27:18.167380", "rc": 0, "start": "2021-06-09 15:27:18.087101", "stderr": "", "stderr_lines": [], "stdout": "Success! Enabled kubernetes auth method at: kubernetes-provider-admin-auth/", "stdout_lines": ["Success! Enabled kubernetes auth method at: kubernetes-provider-admin-auth/"]}
+
+TASK [setup/vault_kubernetes : Get Kubernetes cert files for organizations] ****
+changed: [localhost] => {"changed": true, "cmd": "KUBECONFIG=/home/n474775/.kube/config kubectl get secrets $(KUBECONFIG=/home/n474775/.kube/config kubectl get secrets | grep \"default\" | awk '{print $1}') -o jsonpath=\"{.data['ca\\.crt']}\" | base64 -d > \"./build/provider.ca.cert\"\n", "delta": "0:00:00.228025", "end": "2021-06-09 15:27:18.665055", "rc": 0, "start": "2021-06-09 15:27:18.437030", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+TASK [setup/vault_kubernetes : Write reviewer token for Organizations] *********
+changed: [localhost] => {"changed": true, "cmd": "export REVIEWER_TOKEN=$(KUBECONFIG=/home/n474775/.kube/config kubectl get secret $(KUBECONFIG=/home/n474775/.kube/config kubectl get serviceaccount provider-admin-vault-auth -n provider-ns -o jsonpath={.secrets[0].name}) -n provider-ns -o  jsonpath={.data.token} | base64 -d)\nvault write auth/kubernetes-provider-admin-auth/config token_reviewer_jwt=\"$REVIEWER_TOKEN\" kubernetes_host=\"$(KUBECONFIG=/home/n474775/.kube/config kubectl config view --minify | grep server | cut -f 2- -d \":\" | tr -d \" \")\" kubernetes_ca_cert=@\"./build/provider.ca.cert\"\n", "delta": "0:00:00.352695", "end": "2021-06-09 15:27:19.294400", "rc": 0, "start": "2021-06-09 15:27:18.941705", "stderr": "", "stderr_lines": [], "stdout": "Success! Data written to: auth/kubernetes-provider-admin-auth/config", "stdout_lines": ["Success! Data written to: auth/kubernetes-provider-admin-auth/config"]}
+
+TASK [setup/vault_kubernetes : Check if policy exists] *************************
+fatal: [localhost]: FAILED! => {"changed": true, "cmd": "vault policy read provider-admin-rw\n", "delta": "0:00:00.083002", "end": "2021-06-09 15:27:19.634962", "msg": "non-zero return code", "rc": 2, "start": "2021-06-09 15:27:19.551960", "stderr": "No policy named: provider-admin-rw", "stderr_lines": ["No policy named: provider-admin-rw"], "stdout": "", "stdout_lines": []}
+...ignoring
+
+TASK [setup/vault_kubernetes : Create policy for Access Control] ***************
+changed: [localhost] => {"changed": true, "checksum": "ee4bd63cb0c1845e9048814ed9131547e7477423", "dest": "./build/provider-admin-rw.hcl", "gid": 1003, "group": "n474775", "md5sum": "d5c1df14370d6b8a72907b38e0bc1147", "mode": "0664", "owner": "n474775", "size": 90, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623252439.7144933-3178-126057265737030/source", "state": "file", "uid": 1003}
+
+TASK [setup/vault_kubernetes : Write Policy to Vault] **************************
+changed: [localhost] => {"changed": true, "cmd": "vault write sys/policy/provider-admin-rw policy=\"@./build/provider-admin-rw.hcl\"\n", "delta": "0:00:00.076575", "end": "2021-06-09 15:27:20.459580", "rc": 0, "start": "2021-06-09 15:27:20.383005", "stderr": "", "stderr_lines": [], "stdout": "Success! Data written to: sys/policy/provider-admin-rw", "stdout_lines": ["Success! Data written to: sys/policy/provider-admin-rw"]}
+
+TASK [setup/vault_kubernetes : Create Vault auth role] *************************
+changed: [localhost] => {"changed": true, "cmd": "vault write auth/kubernetes-provider-admin-auth/role/rw bound_service_account_names=provider-admin-vault-auth bound_service_account_namespaces=provider-ns policies=\"provider-admin-rw\" ttl=600s\n", "delta": "0:00:00.081120", "end": "2021-06-09 15:27:20.797673", "rc": 0, "start": "2021-06-09 15:27:20.716553", "stderr": "", "stderr_lines": [], "stdout": "Success! Data written to: auth/kubernetes-provider-admin-auth/role/rw", "stdout_lines": ["Success! Data written to: auth/kubernetes-provider-admin-auth/role/rw"]}
+
+TASK [Check namespace is created] **********************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check Namespace partner-ns is created] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace partner-ns] ***
+ok: [localhost] => {"api_found": true, "attempts": 1, "changed": false, "resources": [{"apiVersion": "v1", "kind": "Namespace", "metadata": {"annotations": {"fluxcd.io/sync-checksum": "96251faf474fd3fa758c30803f112eceeaf36b74", "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{\"fluxcd.io/sync-checksum\":\"96251faf474fd3fa758c30803f112eceeaf36b74\"},\"labels\":{\"fluxcd.io/sync-gc-mark\":\"sha256.oU87dXg3YGoh8zVtTEbsJieuPfMaGTdZuQoGoHV5CoM\"},\"name\":\"partner-ns\"}}\n"}, "creationTimestamp": "2021-06-09T15:16:31Z", "labels": {"fluxcd.io/sync-gc-mark": "sha256.oU87dXg3YGoh8zVtTEbsJieuPfMaGTdZuQoGoHV5CoM"}, "managedFields": [{"apiVersion": "v1", "fieldsType": "FieldsV1", "fieldsV1": {"f:metadata": {"f:annotations": {".": {}, "f:fluxcd.io/sync-checksum": {}, "f:kubectl.kubernetes.io/last-applied-configuration": {}}, "f:labels": {".": {}, "f:fluxcd.io/sync-gc-mark": {}}}, "f:status": {"f:phase": {}}}, "manager": "kubectl", "operation": "Update", "time": "2021-06-09T15:16:31Z"}], "name": "partner-ns", "resourceVersion": "14838219", "selfLink": "/api/v1/namespaces/partner-ns", "uid": "522c6126-e8dc-425e-a16f-cdee7d3e1718"}, "spec": {"finalizers": ["kubernetes"]}, "status": {"phase": "Active"}}]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace partner-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace partner-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Ensures build dir exists] ************************************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"atime": 1623252430.9018667, "attr_flags": "e", "attributes": ["extents"], "block_size": 4096, "blocks": 8, "charset": "binary", "ctime": 1623252440.1019626, "dev": 2049, "device_type": 0, "executable": true, "exists": true, "gid": 1003, "gr_name": "n474775", "inode": 1553708, "isblk": false, "ischr": false, "isdir": true, "isfifo": false, "isgid": false, "islnk": false, "isreg": false, "issock": false, "isuid": false, "mimetype": "inode/directory", "mode": "0755", "mtime": 1623252440.1019626, "nlink": 2, "path": "./build", "pw_name": "n474775", "readable": true, "rgrp": true, "roth": true, "rusr": true, "size": 4096, "uid": 1003, "version": "2741028404", "wgrp": false, "woth": false, "writeable": true, "wusr": true, "xgrp": true, "xoth": true, "xusr": true}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Check if Kubernetes-auth already created for Organization] ***************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+changed: [localhost] => {"changed": true, "cmd": "vault auth list --format json | jq \"to_entries[] | select(.value.restricted|not) | .key\"\n", "delta": "0:00:00.087017", "end": "2021-06-09 15:27:22.911734", "rc": 0, "start": "2021-06-09 15:27:22.824717", "stderr": "", "stderr_lines": [], "stdout": "\"approle/\"\n\"kubernetes-authority-admin-auth/\"\n\"kubernetes-provider-admin-auth/\"\n\"token/\"", "stdout_lines": ["\"approle/\"", "\"kubernetes-authority-admin-auth/\"", "\"kubernetes-provider-admin-auth/\"", "\"token/\""]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [setup/vault_kubernetes : Set the result of vault auth check to a local variable] ***
+ok: [localhost] => {"ansible_facts": {"auth_list": {"changed": true, "cmd": "vault auth list --format json | jq \"to_entries[] | select(.value.restricted|not) | .key\"\n", "delta": "0:00:00.087017", "end": "2021-06-09 15:27:22.911734", "failed": false, "rc": 0, "start": "2021-06-09 15:27:22.824717", "stderr": "", "stderr_lines": [], "stdout": "\"approle/\"\n\"kubernetes-authority-admin-auth/\"\n\"kubernetes-provider-admin-auth/\"\n\"token/\"", "stdout_lines": ["\"approle/\"", "\"kubernetes-authority-admin-auth/\"", "\"kubernetes-provider-admin-auth/\"", "\"token/\""]}}, "changed": false}
+
+TASK [setup/vault_kubernetes : set_fact] ***************************************
+ok: [localhost] => {"ansible_facts": {"component_auth_temp": "\"kubernetes-partner-admin-auth/\"", "vault_auth_status": false}, "changed": false}
+
+TASK [setup/vault_kubernetes : set_fact] ***************************************
+skipping: [localhost] => (item="approle/")  => {"ansible_loop_var": "item", "changed": false, "item": "\"approle/\"", "skip_reason": "Conditional result was False"}
+skipping: [localhost] => (item="kubernetes-authority-admin-auth/")  => {"ansible_loop_var": "item", "changed": false, "item": "\"kubernetes-authority-admin-auth/\"", "skip_reason": "Conditional result was False"}
+skipping: [localhost] => (item="kubernetes-provider-admin-auth/")  => {"ansible_loop_var": "item", "changed": false, "item": "\"kubernetes-provider-admin-auth/\"", "skip_reason": "Conditional result was False"}
+skipping: [localhost] => (item="token/")  => {"ansible_loop_var": "item", "changed": false, "item": "\"token/\"", "skip_reason": "Conditional result was False"}
+
+TASK [setup/vault_kubernetes : Enable and configure Kubernetes-auth for Organization] ***
+changed: [localhost] => {"changed": true, "cmd": "vault auth enable --path=\"kubernetes-partner-admin-auth\" kubernetes\n", "delta": "0:00:00.099530", "end": "2021-06-09 15:27:23.510140", "rc": 0, "start": "2021-06-09 15:27:23.410610", "stderr": "", "stderr_lines": [], "stdout": "Success! Enabled kubernetes auth method at: kubernetes-partner-admin-auth/", "stdout_lines": ["Success! Enabled kubernetes auth method at: kubernetes-partner-admin-auth/"]}
+
+TASK [setup/vault_kubernetes : Get Kubernetes cert files for organizations] ****
+changed: [localhost] => {"changed": true, "cmd": "KUBECONFIG=/home/n474775/.kube/config kubectl get secrets $(KUBECONFIG=/home/n474775/.kube/config kubectl get secrets | grep \"default\" | awk '{print $1}') -o jsonpath=\"{.data['ca\\.crt']}\" | base64 -d > \"./build/partner.ca.cert\"\n", "delta": "0:00:00.238150", "end": "2021-06-09 15:27:24.008129", "rc": 0, "start": "2021-06-09 15:27:23.769979", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+TASK [setup/vault_kubernetes : Write reviewer token for Organizations] *********
+changed: [localhost] => {"changed": true, "cmd": "export REVIEWER_TOKEN=$(KUBECONFIG=/home/n474775/.kube/config kubectl get secret $(KUBECONFIG=/home/n474775/.kube/config kubectl get serviceaccount partner-admin-vault-auth -n partner-ns -o jsonpath={.secrets[0].name}) -n partner-ns -o  jsonpath={.data.token} | base64 -d)\nvault write auth/kubernetes-partner-admin-auth/config token_reviewer_jwt=\"$REVIEWER_TOKEN\" kubernetes_host=\"$(KUBECONFIG=/home/n474775/.kube/config kubectl config view --minify | grep server | cut -f 2- -d \":\" | tr -d \" \")\" kubernetes_ca_cert=@\"./build/partner.ca.cert\"\n", "delta": "0:00:00.377145", "end": "2021-06-09 15:27:24.658464", "rc": 0, "start": "2021-06-09 15:27:24.281319", "stderr": "", "stderr_lines": [], "stdout": "Success! Data written to: auth/kubernetes-partner-admin-auth/config", "stdout_lines": ["Success! Data written to: auth/kubernetes-partner-admin-auth/config"]}
+
+TASK [setup/vault_kubernetes : Check if policy exists] *************************
+fatal: [localhost]: FAILED! => {"changed": true, "cmd": "vault policy read partner-admin-rw\n", "delta": "0:00:00.086853", "end": "2021-06-09 15:27:25.018193", "msg": "non-zero return code", "rc": 2, "start": "2021-06-09 15:27:24.931340", "stderr": "No policy named: partner-admin-rw", "stderr_lines": ["No policy named: partner-admin-rw"], "stdout": "", "stdout_lines": []}
+...ignoring
+
+TASK [setup/vault_kubernetes : Create policy for Access Control] ***************
+changed: [localhost] => {"changed": true, "checksum": "ee4bd63cb0c1845e9048814ed9131547e7477423", "dest": "./build/partner-admin-rw.hcl", "gid": 1003, "group": "n474775", "md5sum": "d5c1df14370d6b8a72907b38e0bc1147", "mode": "0664", "owner": "n474775", "size": 90, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623252445.100589-3604-278374863864542/source", "state": "file", "uid": 1003}
+
+TASK [setup/vault_kubernetes : Write Policy to Vault] **************************
+changed: [localhost] => {"changed": true, "cmd": "vault write sys/policy/partner-admin-rw policy=\"@./build/partner-admin-rw.hcl\"\n", "delta": "0:00:00.090210", "end": "2021-06-09 15:27:25.878750", "rc": 0, "start": "2021-06-09 15:27:25.788540", "stderr": "", "stderr_lines": [], "stdout": "Success! Data written to: sys/policy/partner-admin-rw", "stdout_lines": ["Success! Data written to: sys/policy/partner-admin-rw"]}
+
+TASK [setup/vault_kubernetes : Create Vault auth role] *************************
+changed: [localhost] => {"changed": true, "cmd": "vault write auth/kubernetes-partner-admin-auth/role/rw bound_service_account_names=partner-admin-vault-auth bound_service_account_namespaces=partner-ns policies=\"partner-admin-rw\" ttl=600s\n", "delta": "0:00:00.101688", "end": "2021-06-09 15:27:26.260331", "rc": 0, "start": "2021-06-09 15:27:26.158643", "stderr": "", "stderr_lines": [], "stdout": "Success! Data written to: auth/kubernetes-partner-admin-auth/role/rw", "stdout_lines": ["Success! Data written to: auth/kubernetes-partner-admin-auth/role/rw"]}
+
+TASK [Generate auth job] *******************************************************
+
+TASK [Wait for namespace creation for stewards] ********************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Check Namespace authority-ns is created] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace authority-ns] ***
+ok: [localhost] => {"api_found": true, "attempts": 1, "changed": false, "resources": [{"apiVersion": "v1", "kind": "Namespace", "metadata": {"annotations": {"fluxcd.io/sync-checksum": "19274246586dfccfe49a9208031580e13243e99f", "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{\"fluxcd.io/sync-checksum\":\"19274246586dfccfe49a9208031580e13243e99f\"},\"labels\":{\"fluxcd.io/sync-gc-mark\":\"sha256.SCcbQs8H0fwWD3Y1T_Xek08a2vzBU-CzbhJ0wQD3zI8\"},\"name\":\"authority-ns\"}}\n"}, "creationTimestamp": "2021-06-09T15:16:31Z", "labels": {"fluxcd.io/sync-gc-mark": "sha256.SCcbQs8H0fwWD3Y1T_Xek08a2vzBU-CzbhJ0wQD3zI8"}, "managedFields": [{"apiVersion": "v1", "fieldsType": "FieldsV1", "fieldsV1": {"f:metadata": {"f:annotations": {".": {}, "f:fluxcd.io/sync-checksum": {}, "f:kubectl.kubernetes.io/last-applied-configuration": {}}, "f:labels": {".": {}, "f:fluxcd.io/sync-gc-mark": {}}}, "f:status": {"f:phase": {}}}, "manager": "kubectl", "operation": "Update", "time": "2021-06-09T15:16:31Z"}], "name": "authority-ns", "resourceVersion": "14838217", "selfLink": "/api/v1/namespaces/authority-ns", "uid": "968755c9-513c-4277-8907-71788a6d4afa"}, "spec": {"finalizers": ["kubernetes"]}, "status": {"phase": "Active"}}]}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace authority-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/k8_component : Wait for Namespace authority-ns] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [Create auth_job of stewards, trustee and endorser] ***********************
+
+TASK [Ensures /home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/auth_job/authority dir exists] ***
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : check if dir exists or not] ***
+ok: [localhost] => {"changed": false, "stat": {"exists": false}}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Ensures dir exists] ***
+changed: [localhost] => {"changed": true, "gid": 1003, "group": "n474775", "mode": "0755", "owner": "n474775", "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/auth_job/authority", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if Kubernetes-auth already created for Organization] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check if policy exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/check/setup : Check docker cred exists] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/helm_component/auth_job : Get the kubernetes server url] **********
+changed: [localhost] => {"changed": true, "cmd": "KUBECONFIG=/home/n474775/.kube/config kubectl config view --minify | grep server | cut -f 2- -d \":\" | tr -d \" \"\n", "delta": "0:00:00.065360", "end": "2021-06-09 15:27:28.857990", "rc": 0, "start": "2021-06-09 15:27:28.792630", "stderr": "", "stderr_lines": [], "stdout": "https://aks-tai-use2-baf-lab-1-dns-9ebad36b.hcp.eastus2.azmk8s.io:443", "stdout_lines": ["https://aks-tai-use2-baf-lab-1-dns-9ebad36b.hcp.eastus2.azmk8s.io:443"]}
+
+TASK [create/helm_component/auth_job : Trustee vault policy and role generating] ***
+changed: [localhost] => (item={'trustee': None, 'name': 'authority-trustee', 'genesis': True, 'server': {'port': 8000, 'ambassador': 15010}}) => {"ansible_loop_var": "trusteeItem", "changed": true, "checksum": "9ec1d6fa796b49814d1fd6642f0bf729d4ffa787", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/auth_job/authority/authority-trustee.yaml", "gid": 1003, "group": "n474775", "md5sum": "feb58690b547483c471a1592e6239425", "mode": "0664", "owner": "n474775", "size": 1226, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623252448.9589016-3859-108127382081867/source", "state": "file", "trusteeItem": {"genesis": true, "name": "authority-trustee", "server": {"ambassador": 15010, "port": 8000}, "trustee": null}, "uid": 1003}
+
+TASK [create/helm_component/auth_job : Stewards vault policy and role generating] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/helm_component/auth_job : Endorser vault policy and role generating] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [create/helm_component/auth_job : baf-ac vault policy and role generating] ***
+changed: [localhost] => {"changed": true, "checksum": "15512d99cdee3b16f0199daae0497f727ef0a1b0", "dest": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../platforms/hyperledger-indy/releases/dev/authority/auth_job/authority/baf-ac.yaml", "gid": 1003, "group": "n474775", "md5sum": "d7bbe5c399be1110085dd33acd0295eb", "mode": "0664", "owner": "n474775", "size": 1132, "src": "/home/n474775/.ansible/tmp/ansible-tmp-1623252449.5676749-3905-133377371526343/source", "state": "file", "uid": 1003}
+
+TASK [Push the created deployment files to repository] *************************
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Check if directory: /home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../ exists] ***
+ok: [localhost] => {"changed": false, "gid": 1003, "group": "n474775", "mode": "0775", "owner": "n474775", "path": "/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../../", "size": 4096, "state": "directory", "uid": 1003}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for ssh] ***
+skipping: [localhost] => {"changed": false, "skip_reason": "Conditional result was False"}
+
+TASK [/home/n474775/blockchain-automation-framework/platforms/hyperledger-indy/configuration/../../shared/configuration/roles/git_push : Execute git push for https] ***
