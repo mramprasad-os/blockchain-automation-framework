@@ -1,0 +1,43 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: partner-partner-endorser-transaction
+  annotations:
+    fluxcd.io/automated: "false"
+  namespace: partner-ns
+spec:
+  releaseName: partner-partner-endorser-transaction
+  chart:
+    path: platforms/hyperledger-indy/charts/indy-ledger-txn
+    git: https://github.com/mramprasad-os/blockchain-automation-framework.git
+    ref: develop
+  values:
+    metadata:
+      name: partner-partner-endorser-transaction
+      namespace: partner-ns
+    network:
+      name: baf
+    image:
+      cli:
+        name: partner
+        repository: index.docker.io/hyperledgerlabs/indy-ledger-txn:latest
+        pullSecret: regcred
+    vault:
+      address: http://10.1.3.82:8200
+      role: rw
+      serviceAccountName: partner-admin-vault-auth
+      auth_path: kubernetes-partner-admin-auth
+    organization:
+      name: partner
+      adminIdentity:
+        name: authority-trustee
+        did: NA6kcXQUY6CgQ2WL5JUZTy
+        path: authority/trustees
+      newIdentity:
+        name: partner-endorser
+        role: ENDORSER
+        did: X41WpN3YQropRqyPvF6U14
+        verkey: HNzwtQuQ2TLKzdxMzvEqAjfdDc2xWvL88PuQw8dtsCnN
+        path: partner/endorsers
+    node:
+      name: partner
