@@ -1,0 +1,26 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: university-dtg
+  annotations:
+    fluxcd.io/automated: "false"
+  namespace: university-ns
+spec:
+  releaseName: university-dtg
+  chart:
+    path: platforms/hyperledger-indy/charts/indy-domain-genesis
+    git: https://github.com/mramprasad-os/blockchain-automation-framework.git
+    ref: develop
+  values:
+    metadata:
+      name: university-dtg
+      namespace: university-ns
+    organization:
+      name: university
+    configmap:
+      domainGenesis: |-
+        {"reqSignature":{},"txn":{"data":{"alias":"authority-trustee","dest":"SSNkomCwg5yfVzjh99h6Ra","role":"0","verkey":"Es8Wt1M86G1aSnN93sF65RiAjxQrJTp6Lb5GSNP7EFDF"},"metadata":{},"type":"1"},"txnMetadata":{"seqNo":1},"ver":"1"}
+        {"reqSignature":{},"txn":{"data":{"alias":"university-steward-1","dest":"g2MbViniVjvNGeRfHDtiS","role":"2","verkey":"NGc7jWJXDBnRFxackxTuvYfnepJC8powZrhFw9Zc6qA"},"metadata":{"from":"SSNkomCwg5yfVzjh99h6Ra"},"type":"1"},"txnMetadata":{"seqNo":2},"ver":"1"}
+        {"reqSignature":{},"txn":{"data":{"alias":"university-steward-2","dest":"KTJUnoxT4rvajbLLhpBbTQ","role":"2","verkey":"B4MLVfMsfQVj6t7dwCK9okyWkbj48czJCB46uyVBK1W2"},"metadata":{"from":"SSNkomCwg5yfVzjh99h6Ra"},"type":"1"},"txnMetadata":{"seqNo":3},"ver":"1"}
+        {"reqSignature":{},"txn":{"data":{"alias":"university-steward-3","dest":"JoGDUZZGcugqr9aTxZ5Tqw","role":"2","verkey":"Ahcr92DLWh2BLm8NAyQkX5rATQ5TwcxgDYvaeb1EW2j7"},"metadata":{"from":"SSNkomCwg5yfVzjh99h6Ra"},"type":"1"},"txnMetadata":{"seqNo":4},"ver":"1"}
+        {"reqSignature":{},"txn":{"data":{"alias":"university-steward-4","dest":"SYahyEKxvd71Mt5jdwF9Tt","role":"2","verkey":"EvWheHyvzCosft7eod9HuLYKzryYHKwcZ1is9UAdUESM"},"metadata":{"from":"SSNkomCwg5yfVzjh99h6Ra"},"type":"1"},"txnMetadata":{"seqNo":5},"ver":"1"}
