@@ -1,22 +1,22 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: authority-dtg
+  name: university-dtg
   annotations:
     fluxcd.io/automated: "false"
-  namespace: authority-ns
+  namespace: university-ns
 spec:
-  releaseName: authority-dtg
+  releaseName: university-dtg
   chart:
     path: platforms/hyperledger-indy/charts/indy-domain-genesis
     git: https://github.com/mramprasad-os/blockchain-automation-framework.git
     ref: develop
   values:
     metadata:
-      name: authority-dtg
-      namespace: authority-ns
+      name: university-dtg
+      namespace: university-ns
     organization:
-      name: authority
+      name: university
     configmap:
       domainGenesis: |-
         {"reqSignature":{},"txn":{"data":{"alias":"authority-trustee","dest":"Vo6Pp87doP82kEboACB9Et","role":"0","verkey":"GhFw3S3XpFScqbMRHU54ihXMJ6tipv3xWqd69sdqpGLa"},"metadata":{},"type":"1"},"txnMetadata":{"seqNo":1},"ver":"1"}
