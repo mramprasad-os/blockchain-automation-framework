@@ -1,22 +1,22 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: authority-ptg
+  name: university-ptg
   annotations:
     fluxcd.io/automated: "false"
-  namespace: authority-ns
+  namespace: university-ns
 spec:
-  releaseName: authority-ptg
+  releaseName: university-ptg
   chart:
     path: platforms/hyperledger-indy/charts/indy-pool-genesis
     git: https://github.com/mramprasad-os/blockchain-automation-framework.git
     ref: develop
   values:
     metadata:
-      name: authority-ptg
-      namespace: authority-ns
+      name: university-ptg
+      namespace: university-ns
     organization:
-      name: authority
+      name: university
     configmap:
       poolGenesis: |-
         {"reqSignature":{},"txn":{"data":{"data":{"alias":"university-steward-1","blskey":"3Dtb2mMz8bPwtpAZ4Cay32hR9U1XjvV8Y8CCJwJpKW9RaLmjZ1dbeGaN9x9QFbQvBui1YMeNc5Z9fTvFjj3JM3DVmciSkAN5EjKAx64mKUFRMyd1ECSNvo6rF7nJibFZWNnCgvwwHfhkkd2QmwpaHvCJkPNAq2nK4Rf4EakGzhUprVK","blskey_pop":"R2ubyacTsSyqamBxBwwhSE3AbBXGmMcxy8LpqUcBLHqtTkphhp7Vw6SiwteP2HDMXaF95L5o6kKM8rtggeBjDcJnmrbWcCqKXBEhW1SWJ1XrrgUfUMUjTnBTXrgkYuidAfw7vwA3PPvP1L6vcHAbYNMmpMbknyxPnoYEyiFiS7d9TV","client_ip":"40.75.64.181","client_port":15712,"node_ip":"40.75.64.181","node_port":15711,"services":["VALIDATOR"]},"dest":"DZiSCz4Rk7miLbn1unSNUegZruZHcvzfJeV8whugL71w"},"metadata":{"from":"Q41RMW6dtXVFJgMcw2wgWq"},"type":"0"},"txnMetadata":{"seqNo":1,"txnId":"16bcef3d14020eac552e3f893b83f00847420a02cbfdc80517425023b75f124e"},"ver":"1"}
