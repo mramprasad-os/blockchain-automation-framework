@@ -31,10 +31,10 @@ spec:
         endpoint: 15034
         webhook: 15035
       
-      address: university-endorser.indy.blockchaincloudpoc.com
+      address: university-endorser.baf.aetnalab.com
       
-      ledger: http://authority-webserver.indy.blockchaincloudpoc.com:15010
-      genesis: http://authority-webserver.indy.blockchaincloudpoc.com:15010/genesis
+      ledger: http://authority-webserver.baf.aetnalab.com:15010
+      genesis: http://authority-webserver.baf.aetnalab.com:15010/genesis
     vault:
       address: http://10.1.3.82:8200
       serviceAccountName: university-university-endorser-vault-auth
