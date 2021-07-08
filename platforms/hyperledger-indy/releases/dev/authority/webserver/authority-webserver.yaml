@@ -39,5 +39,5 @@ spec:
     proxy:
       
       provider: "ambassador"
-      external_url: authority-webserver.baf.aetnalab.com
+      external_url: authority-webserver.baf.blockchpoc.com
       port: 15010
