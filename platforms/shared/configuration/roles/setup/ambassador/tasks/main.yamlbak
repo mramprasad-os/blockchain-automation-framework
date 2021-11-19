@@ -1,9 +1,3 @@
-##############################################################################################
-#  Copyright Accenture. All Rights Reserved.
-#
-#  SPDX-License-Identifier: Apache-2.0
-##############################################################################################
-
 ---
 # We have enabled additional ports on Ambassador for TCP. By default 8443 is exposed.
 # The extra ports are pass as parameter --set ambassador.otherPorts={10010,10020} is taken from network.env.ambassadorPorts
@@ -37,14 +31,20 @@
   tags:
     - molecule-idempotence-notest
 
-- name: Get Public IP for Azure
-  set_fact: 
+- name: Get Elastic IP
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ aws.access_key }}"
+    AWS_SECRET_ACCESS_KEY: "{{ aws.secret_key }}"
+  shell: |
     # format ip addresses list to string with space separator
-    allocation_ips: "40.75.64.181" 
+    ips=$(echo '{{ item.publicIps }}' | tr -d '["]' | sed 's/,/\ /g')
+    data=$(aws ec2 describe-addresses --public-ips ${ips} --region {{ aws.region }} --output json | jq '.Addresses[].AllocationId')
+    # format eip addresses list to string with comma separator (comma has to be escaped)
+    echo ${data} | tr -d '"' | sed 's/\ /\\,/g'
+  register: allocation_ips
   when: 
-    - network.type == 'indy'
-    - item.cloud_provider == 'azure'
-    - item.services.stewards is defined 
+    - (network.type == 'indy' and item.services.stewards is defined )
+    - item.cloud_provider == 'aws' or item.cloud_provider == 'aws-baremetal' #As this shell code is specific to AWS, cloud provider check has been added
   tags:
     - notest
 
@@ -97,38 +97,12 @@
   tags:
     - molecule-idempotence-notest
 
-
-# Remove default selfsigned ambassador tls if already exists
-- name: Remove Ambassador cred if exists
-  k8s:
-    kind: Secret
-    namespace: default
-    state: absent
-    name: "ambassador-default-tls"
-    kubeconfig: "{{ kubeconfig_path }}"
-    context: "{{ kubecontext }}"
-  tags:
-    - molecule-idempotence-notest  
-
-# Create and store selfsigned ambassador default certificate
-- name: Create Ambassador default certificate
+- name: Install Ambassador with EIP for Indy
   shell: |
-    mkdir -p ./build/ambassador && cd ./build/ambassador/
-    openssl req -x509 -days 365 -out default_ambassador_tls.pem -keyout default_ambassador_tls.key -newkey rsa:2048 -nodes -sha256 -subj "/CN={{ item.external_url_suffix }}"
-    KUBECONFIG={{ kubeconfig_path }} kubectl create secret tls ambassador-default-tls --cert="default_ambassador_tls.pem" --key="default_ambassador_tls.key" -n default
-  when: 
-    - network.env.external_dns is defined
-    - network.env.external_dns == 'enabled'
-  tags:
-    - molecule-idempotence-notest  
-
-
-- name: Install Ambassador with EIP in our case Azure Public IP for Indy
-  shell: |
-    KUBECONFIG={{ kubeconfig_path }} helm upgrade --install --namespace default {{ ambassadorRange.stdout }} {{ ambassadorPortsIndy.stdout }} --set service.loadBalancerIP='{{ allocation_ips }}' --set ambassador.targetPort={{ ambassador.targetPort }} --set ambassador.port={{ ambassador.port }} --set ambassador.tag={{ ambassador.tag }} --set ambassador.image={{ ambassador.image }} --set ambassador.loadBalancerSourceRanges={"{{ network.env.loadBalancerSourceRanges | default('0.0.0.0/0') }}"} ambassador {{ playbook_dir }}/../../../platforms/shared/charts/ambassador
+    KUBECONFIG={{ kubeconfig_path }} helm upgrade --install --namespace default {{ ambassadorRange.stdout }} {{ ambassadorPortsIndy.stdout }} --set ambassador.eip='{{ allocation_ips.stdout }}' --set ambassador.targetPort={{ ambassador.targetPort }} --set ambassador.port={{ ambassador.port }} --set ambassador.tag={{ ambassador.tag }} --set ambassador.image={{ ambassador.image }} --set ambassador.loadBalancerSourceRanges={"{{ network.env.loadBalancerSourceRanges | default('0.0.0.0/0') }}"} ambassador {{ playbook_dir }}/../../../platforms/shared/charts/ambassador
   when: 
     - network.type == 'indy'
-    - allocation_ips is defined
+    - allocation_ips.stdout is defined
   tags:
     - ambassador
     - molecule-idempotence-notest
@@ -145,15 +119,23 @@
   shell: |
     KUBECONFIG={{ kubeconfig_path }} kubectl annotate service ambassador --overwrite "external-dns.alpha.kubernetes.io/hostname=*.{{ item.external_url_suffix }}."
   when: 
-    - (network.type == 'indy') or network.type != 'indy'
+    - (network.type == 'indy' and allocation_ips.stdout is defined) or network.type != 'indy'
     - network.env.external_dns is defined
     - network.env.external_dns == 'enabled'
   tags:
     - ambassador
     - molecule-idempotence-notest
 
-
-
+# Disable TLS1.0 for the AWS Loadbalancer
+- name: Disable TLS1.0 for the AWS
+  shell: |
+    KUBECONFIG={{ kubeconfig_path }} kubectl annotate service ambassador --overwrite "service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy=ELBSecurityPolicy-TLS-1-2-2017-01"
+  when: 
+    - (network.type == 'indy' and allocation_ips.stdout is defined) or network.type != 'indy'
+    - item.cloud_provider == 'aws' or item.cloud_provider == 'aws-baremetal'
+  tags:
+    - ambassador
+    - molecule-idempotence-notest
 
 # Wait for Ambassador pods to start running
 - name: wait for pods to come up
@@ -167,6 +149,4 @@
     component_type: "Pod"
     label_selectors: 
       - app.kubernetes.io/name=ambassador
-  when:
-    - (network.type == 'indy') or network.type != 'indy'
-    - allocation_ips is defined
+  when: (network.type == 'indy' and allocation_ips.stdout is defined) or network.type != 'indy'

@@ -12,3 +12,4 @@ k8_templates:
   aws-baremetal-storageclass: aws_storageclass.tpl
   aws-storageclass: eks_storageclass.tpl
   minikube-storageclass: mini_storageclass.tpl
+  azure-storageclass: azure_storageclass.tpl
