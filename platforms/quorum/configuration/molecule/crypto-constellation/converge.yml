@@ -1,3 +1,9 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 ---
 - name: Converge
   hosts: localhost
@@ -6,7 +12,7 @@
     privilege_escalate: true 
     install_os: "linux"
     install_arch:  "amd64"
-    bin_install_dir:  "~/bin"
+    bin_install_dir:  "{{ playbook_dir }}/build/bin"
     network:
       type: quorum
       version: 2.5.0
@@ -64,7 +70,7 @@
           vault:
             url: http://localhost:9090/
             root_token: "root"
-            secret_path: "secret"
+            secret_path: "secretsv2"
 
           services:
             peers:

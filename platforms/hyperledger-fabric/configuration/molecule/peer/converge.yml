@@ -1,3 +1,9 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 ---
 - name: Converge
   hosts: localhost
@@ -45,7 +51,7 @@
         vault:
           url: http://localhost:9090/
           root_token: "root"
-          secret_path: "secret"
+          secret_path: "secretsv2"
 
         gitops:
           git_protocol: "https"

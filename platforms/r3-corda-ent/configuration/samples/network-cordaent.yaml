@@ -1,4 +1,11 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 ---
+# yaml-language-server: $schema=../../../../platforms/network-schema.json
 # This is a sample configuration file for Corda Enterprise network for SupplyChain App usecase on Single K8s Cluster.
 # For multiple K8s clusters, there should be multiple configuration files or refer to configuration guide on the below link.
 # https://blockchain-automation-framework.readthedocs.io/en/latest/operations/corda_networkyaml.html
@@ -59,7 +66,7 @@ network:
       subject: "CN=DLT Root CA,OU=DLT,O=DLT,L=London,C=GB"
       subordinate_ca_subject: "CN=Test Subordinate CA Certificate, OU=HQ, O=HoldCo LLC, L=New York, C=US"
       type: cenm
-      version: 1.2
+      version: 1.5
       external_url_suffix: test.corda.blockchaincloudpoc.com
   
       cloud_provider: aws   # Options: aws, azure, gcp
@@ -78,7 +85,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -89,7 +96,7 @@ network:
         chart_source: "platforms/r3-corda-ent/charts"     # Relative Path where the Helm charts are stored in Git repo
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push 
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
       
@@ -97,11 +104,11 @@ network:
       cordapps:
         jars: 
         - jar:
-            # e.g https://alm.accenture.com/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-supply-chain/0.1/cordapp-supply-chain-0.1.jar
-            url: 
+            # e.g https://nexus.repo.url/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-supply-chain/0.1/cordapp-supply-chain-0.1.jar
+            url: "https://repo/path/cordapp1.jar"
         - jar:
-            # e.g https://alm.accenture.com/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-contracts-states/0.1/cordapp-contracts-states-0.1.jar
-            url: 
+            # e.g https://nexus.repo.url/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-contracts-states/0.1/cordapp-contracts-states-0.1.jar
+            url: "https://repo/path/cordapp2.jar"
         username: "repository_username"
         password: "repository_password"
 
@@ -150,7 +157,7 @@ network:
         - notary:
           name: notary-1
           subject: "O=Notary,OU=Notary1,L=London,C=GB"
-          serviceName: "O=Notary Service,OU=Notary,L=London,C=GB"
+          serviceName: "O=Notary Service,OU=Notary1,L=London,C=GB"
           type: notary
           validating: true
           emailAddress: "dev@baf.com"      
@@ -173,7 +180,7 @@ network:
         - notary:
           name: notary-2
           subject: "O=Notary,OU=Notary2,L=London,C=GB"
-          serviceName: "O=Notary Service,OU=Notary,L=London,C=GB"
+          serviceName: "O=Notary Service,OU=Notary2,L=London,C=GB"
           type: notary
           validating: true
           emailAddress: "dev@baf.com"      
@@ -226,7 +233,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -237,7 +244,7 @@ network:
         chart_source: "platforms/r3-corda-ent/charts"     # Relative Path where the Helm charts are stored in Git repo
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push 
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
       
@@ -245,11 +252,11 @@ network:
       cordapps:
         jars: 
         - jar:
-            # e.g https://alm.accenture.com/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-supply-chain/0.1/cordapp-supply-chain-0.1.jar
-            url: 
+            # e.g https://nexus.repo.url/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-supply-chain/0.1/cordapp-supply-chain-0.1.jar
+            url: "https://repo/path/cordapp1.jar"
         - jar:
-            # e.g https://alm.accenture.com/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-contracts-states/0.1/cordapp-contracts-states-0.1.jar
-            url: 
+            # e.g https://nexus.repo.url/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-contracts-states/0.1/cordapp-contracts-states-0.1.jar
+            url: "https://repo/path/cordapp2.jar"
         username: "repository_username"
         password: "repository_password"
 
@@ -277,7 +284,7 @@ network:
             chart_source: "platforms/r3-corda-ent/charts"     # Relative Path where the Helm charts are stored in Git repo
             username: "git_username"          # Git Service user who has rights to check-in in all branches
             password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-            email: "git_email"                # Email to use in git config
+            email: "git@email.com"                # Email to use in git config
             git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push 
             private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
           ports:
@@ -354,7 +361,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -365,7 +372,7 @@ network:
         chart_source: "platforms/r3-corda-ent/charts"     # Relative Path where the Helm charts are stored in Git repo
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push 
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
       
@@ -373,11 +380,11 @@ network:
       cordapps:
         jars: 
         - jar:
-            # e.g https://alm.accenture.com/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-supply-chain/0.1/cordapp-supply-chain-0.1.jar
-            url: 
+            # e.g https://nexus.repo.url/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-supply-chain/0.1/cordapp-supply-chain-0.1.jar
+            url: "https://repo/path/cordapp1.jar"
         - jar:
-            # e.g https://alm.accenture.com/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-contracts-states/0.1/cordapp-contracts-states-0.1.jar
-            url: 
+            # e.g https://nexus.repo.url/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-contracts-states/0.1/cordapp-contracts-states-0.1.jar
+            url: "https://repo/path/cordapp2.jar"
         username: "repository_username"
         password: "repository_password"
       
@@ -404,7 +411,7 @@ network:
             chart_source: "platforms/r3-corda-ent/charts"     # Relative Path where the Helm charts are stored in Git repo
             username: "git_username"          # Git Service user who has rights to check-in in all branches
             password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-            email: "git_email"                # Email to use in git config
+            email: "git@email.com"                # Email to use in git config
             git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push 
             private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
           ports:
@@ -481,7 +488,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -492,7 +499,7 @@ network:
         chart_source: "platforms/r3-corda-ent/charts"     # Relative Path where the Helm charts are stored in Git repo
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push 
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
 
@@ -500,11 +507,11 @@ network:
       cordapps:
         jars: 
         - jar:
-            # e.g https://alm.accenture.com/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-supply-chain/0.1/cordapp-supply-chain-0.1.jar
-            url: 
+            # e.g https://nexus.repo.url/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-supply-chain/0.1/cordapp-supply-chain-0.1.jar
+            url: "https://repo/path/cordapp1.jar"
         - jar:
-            # e.g https://alm.accenture.com/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-contracts-states/0.1/cordapp-contracts-states-0.1.jar
-            url: 
+            # e.g https://nexus.repo.url/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-contracts-states/0.1/cordapp-contracts-states-0.1.jar
+            url: "https://repo/path/cordapp2.jar"
         username: "repository_username"
         password: "repository_password"
 
@@ -531,7 +538,7 @@ network:
             chart_source: "platforms/r3-corda-ent/charts"     # Relative Path where the Helm charts are stored in Git repo
             username: "git_username"          # Git Service user who has rights to check-in in all branches
             password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-            email: "git_email"                # Email to use in git config
+            email: "git@email.com"                # Email to use in git config
             git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push 
             private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
           ports:
@@ -608,7 +615,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -619,7 +626,7 @@ network:
         chart_source: "platforms/r3-corda-ent/charts"     # Relative Path where the Helm charts are stored in Git repo
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push 
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
       
@@ -627,11 +634,11 @@ network:
       cordapps:
         jars: 
         - jar:
-            # e.g https://alm.accenture.com/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-supply-chain/0.1/cordapp-supply-chain-0.1.jar
-            url: 
+            # e.g https://nexus.repo.url/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-supply-chain/0.1/cordapp-supply-chain-0.1.jar
+            url: "https://repo/path/cordapp1.jar"
         - jar:
-            # e.g https://alm.accenture.com/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-contracts-states/0.1/cordapp-contracts-states-0.1.jar
-            url: 
+            # e.g https://nexus.repo.url/nexus/repository/AccentureBlockchainFulcrum_Release/com/supplychain/bcc/cordapp-contracts-states/0.1/cordapp-contracts-states-0.1.jar
+            url: "https://repo/path/cordapp2.jar"
         username: "repository_username"
         password: "repository_password"
         
@@ -658,7 +665,7 @@ network:
             chart_source: "platforms/r3-corda-ent/charts"     # Relative Path where the Helm charts are stored in Git repo
             username: "git_username"          # Git Service user who has rights to check-in in all branches
             password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-            email: "git_email"                # Email to use in git config
+            email: "git@email.com"                # Email to use in git config
             git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push 
             private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
           ports:

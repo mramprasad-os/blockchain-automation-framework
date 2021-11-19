@@ -16,8 +16,8 @@ spec:
     metadata:
       namespace: {{ component_ns }}
     image:
-      initContainerName: {{ network.docker.url }}/alpine-utils:1.0
-      signerContainerName: {{ network.docker.url }}/corda/enterprise-signer:1.2-zulu-openjdk8u242
+      initContainerName: {{ network.docker.url }}/{{ init_image }}
+      signerContainerName: {{ network.docker.url }}/{{ docker_image }}
       imagePullSecret: regcred
       pullPolicy: Always
     acceptLicense: YES
@@ -26,7 +26,7 @@ spec:
       role: vault-role
       authPath: {{ component_auth }}
       serviceAccountName: vault-auth
-      certSecretPrefix: {{ vault.secret_path | default('secret') }}/{{ org.name | lower }}
+      certsecretprefix: {{ vault.secret_path | default('secretsv2') }}/data/{{ org.name | lower }}
       retries: 10
       sleepTimeAfterError: 15
     service:
@@ -63,7 +63,7 @@ spec:
           interval: 1m
     config:
       volume:
-        baseDir: /opt/corda
+        baseDir: /opt/cenm
       jarPath: bin
       configPath: etc
       cordaJar:

@@ -1,3 +1,9 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 ---
 - name: Converge
   hosts: localhost
@@ -25,7 +31,7 @@
 
       organizations:
         - organization:
-          name: carrier
+          name: testns
           unit: Carrier
           external_url_suffix: test.quorum.blockchaincloudpoc.com 
           cloud_provider: aws 
@@ -38,7 +44,7 @@
           vault:
             url: "vault_addr"
             root_token: "vault_root_token"
-            secret_path: "secret"
+            secret_path: "secretsv2"
             
           gitops:
             git_protocol: "https" 
@@ -58,7 +64,7 @@
           services:
             peers:
             - peer:
-              name: carrier
+              name: testns
               subject: "O=Carrier,OU=Carrier,L=51.50/-0.13/London,C=GB" 
               type: validator 
               consortium_role: admin
@@ -83,7 +89,7 @@
               frontend:
                 targetPort: 80
                 port: 8080
-              geth_url: "http://carrier.test.corda.blockchaincloudpoc.com:15011" 
+              geth_url: "http://testns.test.corda.blockchaincloudpoc.com:15011" 
       
   pre_tasks:
     - name: Create temp roles dir folder
@@ -125,7 +131,7 @@
           vault: "{{ item.vault }}"
           url: http://localhost:9090/
           root_token: root
-          secret_path: "secret"
+          secret_path: "secretsv2"
         root_subject: "{{ network.config.subject }}"
         cert_subject: "{{ network.config.subject | regex_replace(',', '/') }}"  
       loop: "{{ network['organizations'] }}"

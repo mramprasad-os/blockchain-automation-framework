@@ -1,3 +1,9 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 ---
 - name: Cleanup after Molecule Test
   hosts: localhost
@@ -10,6 +16,7 @@
     file:
       path: "./build"
       state: absent
+    become: yes  
 
   #This task deletes the temporarily created shared directory
   - name: Delete temp roles folder

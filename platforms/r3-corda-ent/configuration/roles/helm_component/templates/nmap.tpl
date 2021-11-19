@@ -29,7 +29,7 @@ spec:
       role: vault-role
       authPath: cordaent{{ org.name | lower }}
       serviceAccountName: vault-auth
-      certSecretPrefix: {{ org.vault.secret_path | default('secret') }}/{{ org.name | lower }}
+      certSecretPrefix: {{ org.vault.secret_path | default('secretsv2') }}/data/{{ org.name | lower }}
       retries: 10
       sleepTimeAfterError: 15
     service: 
@@ -61,7 +61,7 @@ spec:
       runMigration: "true"
     config:
       volume:
-        baseDir: /opt/corda
+        baseDir: /opt/cenm
       jarPath: bin
       configPath: etc
       cordaJar:
@@ -74,3 +74,20 @@ spec:
       replicas: 1
     ambassador:
       external_url_suffix: "{{ org.external_url_suffix }}"
+{% if nmap_update is defined and nmap_update %}
+    nmapUpdate: true
+    addNotaries:
+{% for enode in node_list %}
+      - notary: 
+          nodeinfoFileName: {{ enode.nodeinfo_name }}
+          nodeinfoFile: {{ enode.nodeinfo }}
+          validating: {{ enode.validating }}
+{% endfor %}
+{% else %}
+    nmapUpdate: false
+    addNotaries:
+      - notary: 
+          nodeinfoFileName: dummy
+          nodeinfoFile: dummy
+          validating: false
+{% endif %}

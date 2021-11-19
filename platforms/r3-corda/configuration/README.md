@@ -1,3 +1,8 @@
+[//]: # (##############################################################################################)
+[//]: # (Copyright Accenture. All Rights Reserved.)
+[//]: # (SPDX-License-Identifier: Apache-2.0)
+[//]: # (##############################################################################################)
+
 # R3 Corda Configuration
 This configuration folder contains Ansible playbooks and their corresponding roles, which are used to deploy R3 Corda on Managed Kubernetes Cluster(s).
 
@@ -29,7 +34,7 @@ Execute the playbook by running the command below - executed from the root of th
 ```
 ansible-playbook platforms/shared/configuration/site.yaml -e "@/path/to/network-corda.yaml"
 ```
-The [platforms/shared/configuration/site.yaml](../../shared/configuration/site.yaml) is the master playbook which does basic environment setup, configures the Kubernetes cluster and then calls platform specific deployment playbooks.
+The [platforms/shared/configuration/site.yaml](../../shared/configuration/site.yaml) is the main playbook which does basic environment setup, configures the Kubernetes cluster and then calls platform specific deployment playbooks.
 
 You can also only run the platform specific deployment playbooks by running the command below (after the prerequisites have been installed) - executed from the root of the project:
 ```

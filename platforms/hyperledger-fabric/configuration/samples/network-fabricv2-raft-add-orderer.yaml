@@ -1,10 +1,17 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 ---
+# yaml-language-server: $schema=../../../../platforms/network-schema.json
 # This is a sample configuration file for adding new RAFT node to existing Orderer orgnaization.
 network:
   # Network level configuration specifies the attributes required for each organization
   # to join an existing network.
   type: fabric
-  version: 2.2.0                 # currently tested 1.4.8 and 2.2.0
+  version: 2.2.2                 # currently tested 1.4.8 and 2.2.2
 
   frontend: enabled #Flag for frontend to enabled for nodes/peers
 
@@ -149,7 +156,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -161,7 +168,7 @@ network:
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push  (without https://)
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
      
       # Services maps to the pods that will be deployed on the k8s cluster

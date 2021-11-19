@@ -1,3 +1,9 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 # USAGE: 
 # docker build . -t baf-build
 # docker run -v $(pwd):/home/blockchain-automation-framework/ baf-build
@@ -7,7 +13,7 @@ FROM ubuntu:20.04
 # Create working directory
 WORKDIR /home/
 ENV PYTHON_VERSION='3.6.13'
-ENV OPENSHIFT_VERSION='0.10.1'
+ENV OPENSHIFT_VERSION='0.11.0'
 
 RUN apt-get update -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -20,7 +26,8 @@ RUN apt-get update -y && \
         gcc \
         git \
         libdb-dev libleveldb-dev libsodium-dev zlib1g-dev libtinfo-dev \
-        jq
+        jq \
+        npm
 
 # Install Python 3.6.5
 RUN wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz \
@@ -39,7 +46,10 @@ RUN apt-get update && apt-get install -y \
     pip3 install jmespath && \
     pip3 install openshift==${OPENSHIFT_VERSION} && \
     apt-get clean && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
     rm -rf /var/lib/apt/lists/*
+RUN npm install -g ajv-cli    
+RUN apt-get update && apt-get install -y python3-venv
 
 RUN rm /etc/apt/apt.conf.d/docker-clean
 RUN mkdir /etc/ansible/

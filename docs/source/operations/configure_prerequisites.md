@@ -1,3 +1,8 @@
+[//]: # (##############################################################################################)
+[//]: # (Copyright Accenture. All Rights Reserved.)
+[//]: # (SPDX-License-Identifier: Apache-2.0)
+[//]: # (##############################################################################################)
+
 <a name = "configuring-prerequisites"></a>
 # Configure Pre-requisites
 
@@ -12,7 +17,7 @@
 <a name = "Ansible_Inventory"></a>
 ## Ansible Inventory file
 
-If not done already, configure the Ansible controller with this sample inventory file is located [here](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/master/platforms/shared/inventory/ansible_provisioners). 
+If not done already, configure the Ansible controller with this sample inventory file is located [here](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/main/platforms/shared/inventory/ansible_provisioners). 
 
 Add the contents of this file in your Ansible host configuration file (typically in file /etc/ansible/hosts).
 
@@ -81,7 +86,7 @@ vault operator unseal << unseal-key-from-above >>
 ```
 vault login << give the root token >>
 ```
-* Enable secrets engine. Blockchain Automation Framework uses the secret path `secret` by default. This can be changed in the network.yaml, in which case it will need to be enabled with the selected path.
+* Enable v1 secrets engine. Blockchain Automation Framework uses the secret path `secret` by default. This can be changed in the network.yaml, in which case it will need to be enabled with the selected path.
 ```
 vault secrets enable -version=1 -path=secret kv
 ```

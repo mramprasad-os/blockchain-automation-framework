@@ -1,3 +1,8 @@
+[//]: # (##############################################################################################)
+[//]: # (Copyright Accenture. All Rights Reserved.)
+[//]: # (SPDX-License-Identifier: Apache-2.0)
+[//]: # (##############################################################################################)
+
 # Configuration file specification: R3 Corda
 A network.yaml file is the base configuration file for setting up a Corda DLT network. This file contains all the information related to the infrastructure and network specifications. Here is the structure of it.
 ![](./../_static/TopLevelClass-Corda.png)
@@ -5,6 +10,11 @@ A network.yaml file is the base configuration file for setting up a Corda DLT ne
 Before setting up a Corda DLT/Blockchain network, this file needs to be updated with the required specifications.
 A sample configuration file is provide in the repo path:  
 `platforms/r3-corda/configuration/samples/network-cordav2.yaml`  
+
+A json-schema definition is provided in `platforms/network-schema.json` to assist with semantic validations and lints. You can use your favorite yaml lint plugin compatible with json-schema specification, like `redhat.vscode-yaml` for VSCode. You need to adjust the directive in template located in the first line based on your actual build directory:
+
+`# yaml-language-server: $schema=../platforms/network-schema.json`
+
 
 The configurations are grouped in the following sections for better understanding.
 
@@ -148,7 +158,7 @@ Each organization under the `organizations` section has the following fields.
 | subject                                     | Subject format can be referred at [OpenSSL Subject](https://www.openssl.org/docs/man1.0.2/man1/openssl-req.html) |
 | subordinate_ca_subject | Only for **Corda Enterprise**. Subordinate CA Subject for the CENM.|
 | type                                        | This field can be doorman-nms-notary/node/cenm              |
-| version | Defines the CENM version. Only for **Corda Enterprise**, must be `1.2` |
+| version | Defines the CENM version. Only for **Corda Enterprise**, must be `1.5` |
 | external_url_suffix                         | Public url suffix of the cluster. This is the configured path for the Ambassador Service on the DNS provider.|
 | cloud_provider                              | Cloud provider of the Kubernetes cluster for this organization. This field can be aws, azure or gcp |
 | aws                                         | When the organization cluster is on AWS |
@@ -234,8 +244,8 @@ For organization as type `cenm` the credential block looks like
           keystore: cordacadevpass #notary keystore password
           idman: password #idman keystore password
           networkmap: password #networkmap keystore password
-          subordinateca: password #subordinateca keystore password
-          rootca: password # rootca keystore password
+          subordinateca: password #subordinateCA keystore password
+          rootca: password # rootCA keystore password
           tlscrlsigner: password #tls-crl-signer keystore password
         truststore:
           truststore: trustpass #notary truststore password

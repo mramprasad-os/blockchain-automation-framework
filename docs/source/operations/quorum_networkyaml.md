@@ -1,10 +1,20 @@
+[//]: # (##############################################################################################)
+[//]: # (Copyright Accenture. All Rights Reserved.)
+[//]: # (SPDX-License-Identifier: Apache-2.0)
+[//]: # (##############################################################################################)
+
 # Configuration file specification: Quorum
 A network.yaml file is the base configuration file designed in the Blockchain Automation Framework for setting up a Quorum DLT network. This file contains all the configurations related to the network that has to be deployed. Below shows its structure.
 ![](./../_static/TopLevelClass-Quorum.png)
 
 Before setting up a Quorum DLT/Blockchain network, this file needs to be updated with the required specifications.  
+
 A sample configuration file is provided in the repo path:  
 `platforms/quorum/configuration/samples/network-quorum.yaml` 
+
+A json-schema definition is provided in `platforms/network-schema.json` to assist with semantic validations and lints. You can use your favorite yaml lint plugin compatible with json-schema specification, like `redhat.vscode-yaml` for VSCode. You need to adjust the directive in template located in the first line based on your actual build directory:
+
+`# yaml-language-server: $schema=../platforms/network-schema.json`
 
 The configurations are grouped in the following sections for better understanding.
 
@@ -28,10 +38,10 @@ The sections in the sample configuration file are
 
 `type` defines the platform choice like corda/fabric/indy/quorum, here in the example its **quorum**.
 
-`version` defines the version of platform being used. The current Quorum version support is only for **2.5.0**
+`version` defines the version of platform being used. The current Quorum version support is only for **21.4.2**
 
 ---
-**NOTE**: Use Quorum Version 2.5.0 if you are deploying Supplychain smartcontracts from examples.
+**NOTE**: Use Quorum Version 21.4.2 if you are deploying Supplychain smartcontracts from examples.
 
 ---
 
@@ -99,8 +109,7 @@ The snapshot of the `config` section with example values is below
     # This is the version of "tessera" or "constellation" docker image that will be deployed
     # Supported versions #
     # constellation: 0.3.2 (For all versions of quorum)
-    # tessera: 0.10.4 (for quorum 2.5.0)
-    tm_version: "0.10.4"               # This is the version of "tessera" and "constellation" docker image that will be deployed
+    tm_version: "21.4.0"               # This is the version of "tessera" and "constellation" docker image that will be deployed
     tm_tls: "strict"                  # Options are "strict" and "off"
     tm_trust: "tofu"                  # Options are: "whitelist", "ca-or-tofu", "ca", "tofu"
     ## Transaction Manager nodes public addresses should be provided.
@@ -137,7 +146,7 @@ The fields under `config` are
 | consensus   | Currently supports `raft` or `ibft`. Please update the remaining items according to the consensus chosen as not all values are valid for both the consensus.                                 |
 | subject     | This is the subject of the root CA which will be created for the Quorum network. The root CA is for development purposes only, production networks should already have the root certificates.   |
 | transaction_manager    | Options are `tessera` and `constellation`. Please update the remaining items according to the transaction_manager chosen as not all values are valid for both the transaction_manager. |
-| tm_version         | This is the version of `tessera` and `constellation` docker image that will be deployed. Supported versions: `0.10.4` and `0.9.2` for `tessera` and `0.3.2` for `constellation`. |
+| tm_version         | This is the version of `tessera` and `constellation` docker image that will be deployed. Supported versions: `21.4.0` for `tessera` and `0.3.2` for `constellation`. |
 | tm_tls | Options are `strict` and `off`. This enables TLS for the transaction managers, and is not related to the actual Quorum network. `off` is not recommended for production. |
 | tm_trust | Options are: `whitelist`, `ca-or-tofu`, `ca`, `tofu`. This is the trust relationships for the transaction managers. More details [for tessera]( https://github.com/jpmorganchase/tessera/wiki/TLS) and [for consellation](https://github.com/jpmorganchase/constellation/blob/master/sample.conf).|
 | tm_nodes | The Transaction Manager nodes public addresses should be provided. For `tessera`, all participating nodes should be provided, for `constellation`, only one bootnode should be provided. NOTE The difference in the addresses for Tessera and Constellation. |
@@ -147,6 +156,7 @@ The fields under `config` are
 
 
 The `organizations` section contains the specifications of each organization.  
+
 In the sample configuration example, we have four organization under the `organizations` section.
 
 The snapshot of an organization field with sample values is below
@@ -236,7 +246,7 @@ Each organization with type as peer will have a peers service. The snapshot of p
         - peer:
           name: carrier
           subject: "O=Carrier,OU=Carrier,L=51.50/-0.13/London,C=GB" # This is the node subject. L=lat/long is mandatory for supplychain sample app
-          type: validator         # value can be validator or non-validator, only applicable if consensus = 'ibft'
+          type: validator         # value can be validator or member, only applicable if consensus = 'ibft'
           geth_passphrase: 12345  # Passphrase to be used to generate geth account
           p2p:
             port: 21000

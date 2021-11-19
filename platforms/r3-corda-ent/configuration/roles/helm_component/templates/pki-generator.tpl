@@ -22,13 +22,13 @@ spec:
       pullPolicy: Always
     acceptLicense: YES
     volume:
-      baseDir: /opt/corda
+      baseDir: /opt/cenm
     vault:
       address: {{ vault.url }}
       role: vault-role
       authpath: cordaent{{ org.name | lower }}
       serviceaccountname: vault-auth
-      certsecretprefix: {{ vault.secret_path | default('secret') }}/{{ org.name | lower }}
+      certsecretprefix: {{ vault.secret_path | default('secretsv2') }}/data/{{ org.name | lower }}
       retries: 20
       sleepTimeAfterError: 20
     cenmServices:

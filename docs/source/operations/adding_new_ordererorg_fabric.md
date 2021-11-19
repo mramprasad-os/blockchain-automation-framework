@@ -1,3 +1,8 @@
+[//]: # (##############################################################################################)
+[//]: # (Copyright Accenture. All Rights Reserved.)
+[//]: # (SPDX-License-Identifier: Apache-2.0)
+[//]: # (##############################################################################################)
+
 <a name = "adding-new-orderer-to-existing-network-in-fabric"></a>
 # Adding a new Orderer organization in Hyperledger Fabric
 
@@ -21,7 +26,7 @@ Addition of new Orderer organization only works with Fabric 2.2.2 and RAFT Servi
 
 Refer [this guide](./fabric_networkyaml.md) for details on editing the configuration file.
 
-While modifying the configuration file(`network.yaml`) for adding new orderer organization, all the existing organizations should have `org_status` tag as `existing` and the new organization should have `org_status` tag as `new` under `network.channels` eg.
+While modifying the configuration file(`network.yaml`) for adding new orderer organization, all the existing organizations should have `org_status` tag as `existing` and the new organization should have `org_status` tag as `new` under `network.channels` e.g.
 
     network:
       channels:
@@ -51,15 +56,15 @@ and under `network.organizations` as
           ..
           org_status: existing  # existing for old organization(s)
 
-The `network.yaml` file should contain the specific `network.organization` patch along with the orderer information.
+The `network.yaml` file should contain the specific `network.organization` details along with the orderer information.
 
 
-For reference, see `network-fabric-add-ordererorg.yaml` file [here](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/master/platforms/hyperledger-fabric/configuration/add-orderer-organization.yaml).
+For reference, see `network-fabric-add-ordererorg.yaml` file [here](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/main/platforms/hyperledger-fabric/configuration/add-orderer-organization.yaml).
 
 <a name = "run_network"></a>
 ## Run playbook
 
-The [add-orderer-organization.yaml](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/master/platforms/hyperledger-fabric/configuration/add-orderer-organization.yaml) playbook is used to add a new Orderer organization to the existing network. This can be done using the following command
+The [add-orderer-organization.yaml](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/main/platforms/hyperledger-fabric/configuration/add-orderer-organization.yaml) playbook is used to add a new Orderer organization to the existing network. This can be done using the following command
 
 ```
 ansible-playbook platforms/hyperledger-fabric/configuration/add-orderer-organization.yaml --extra-vars "@path-to-network.yaml"

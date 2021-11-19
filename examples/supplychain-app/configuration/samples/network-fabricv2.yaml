@@ -1,3 +1,9 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 ---
 # This is a sample configuration file for SupplyChain App on Single K8s Cluster.
 # For multiple K8s clusters, there should be multiple configuration files.
@@ -120,7 +126,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
 
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_password
@@ -197,7 +203,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
 
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_password
@@ -292,7 +298,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
 
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_password
@@ -385,7 +391,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
 
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_password
@@ -478,7 +484,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
 
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_password

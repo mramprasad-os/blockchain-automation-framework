@@ -65,7 +65,7 @@ spec:
       address: {{ vault.url }}
       role: vault-role
       authpath: {{ network.env.type }}{{ namespace }}-auth
-      secretprefix: {{ vault.secret_path | default('secret') }}/crypto/ordererOrganizations/{{ namespace }}/orderers/{{ orderer.name }}.{{ namespace }}
+      secretprefix: {{ vault.secret_path | default('secretsv2') }}/data/crypto/ordererOrganizations/{{ namespace }}/orderers/{{ orderer.name }}.{{ namespace }}
       imagesecretname: regcred
       serviceaccountname: vault-auth
 {% if orderer.consensus == 'kafka' %}
@@ -83,4 +83,4 @@ spec:
       external_url_suffix: {{ item.external_url_suffix }}
 
     genesis: |-
-{{ genesis | indent(width=6, indentfirst=True) }}
+{{ genesis | indent(width=6, first=True) }}

@@ -1,3 +1,8 @@
+[//]: # (##############################################################################################)
+[//]: # (Copyright Accenture. All Rights Reserved.)
+[//]: # (SPDX-License-Identifier: Apache-2.0)
+[//]: # (##############################################################################################)
+
 <a name = "upgrading-2to3"></a>
 # Upgrading a running helm2 BAF deployment to helm3
 This guide enables an operator to upgrade an existing BAF helm2 deployment to helm3
@@ -15,9 +20,10 @@ This guide enables an operator to upgrade an existing BAF helm2 deployment to he
 
 <a name = "delete_flux"></a>
 ## Deleting the existing flux deployment
-The flux deployment has changed for helm v3, and thus the older flux should be deleted.
-Also, the older flux will interfere with the upgradation process, hence its removal or de-sync is necessary
-To delete the existing flux deployment  
+The flux deployment has changed for helm v3, thus the older flux should be deleted.
+Also, the older flux will interfere with the upgradation process, hence its removal or de-sync is necessary. 
+
+To delete the existing flux deployment, run:  
 
     helm del --purge flux-{{ network.env.type }}
 

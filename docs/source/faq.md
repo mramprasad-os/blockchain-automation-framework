@@ -1,3 +1,8 @@
+[//]: # (##############################################################################################)
+[//]: # (Copyright Accenture. All Rights Reserved.)
+[//]: # (SPDX-License-Identifier: Apache-2.0)
+[//]: # (##############################################################################################)
+
 Frequently Asked Questions
 ==========================
 
@@ -20,7 +25,7 @@ A developer can be a DevOps or Full Stack Developer who would have knowledge onÂ
 
 A **common scenario** that a developer would like to use this repo might be that s/he would like to gain knowledge on production-scale DLT/Blockchain development, but might not have enough technical skills and experiences yet. Learing knowledge from the existing poorly-designed architecture would be time-consuming and fruitless.
 
-The Blockchain Automation Framework provisions its **unique values** to the developer that s/he now has an opportunity to learn how different sets of cutting-edge technologies leveraged in this repository are combined in use such as reusable architecture patterns, reusable assets including APIs or microservices design. The architecture design in this repository has been fully tested and demonstrated as a high-quality one known for a fact that it has been being improved continously through the technical experts' rich experiences. The developer could try to use this repository to set up a small-size DLT/Blockchain network to see how it works and gradually pick up new skills across Blockchain, DevOps etc.
+The Blockchain Automation Framework provisions its **unique values** to the developer that s/he now has an opportunity to learn how different sets of cutting-edge technologies leveraged in this repository are combined in use such as reusable architecture patterns, reusable assets including APIs or microservices design. The architecture design in this repository has been fully tested and demonstrated as a high-quality one known for a fact that it has been being improved continously through the technical experts' rich experiences. The developer could try to use this repository to set up a small-size DLT/Blockchain network to see how it works and gradually pick up new skills across Blockchain, DevOps, etc.
 
 Furthermore, the developer could even show the maturity of skills to contribute back to this project. Contributions can include but not limited to (1) suggest or add new functionalities (2) fix various bugs and (3) organize hackthon or developer events for the Blockchain Automation Framework in the future.
 
@@ -30,7 +35,7 @@ In simple words, the Blockchain Automation Framework works as an accelerator to 
 ### How do I find more about the Blockchain Automation Framework?
 Normally, when a user sees information in this section, it means that s/he has already known the existence of the Blockchain Automation Framework project, at least this readthedocs website. Basically, this website provisions a high-level background information of how to use the Blockchain Automation Framework GitHub repository. For detailed step-by-step instructions, one should go to the Blockchain Automation Framework's GitHub repository and find the readme files for a further reading. Upon finishing reading the tutorials in this website, one should be able to analyse whether the Blockchain Automation Framework would be the right solution in your case and reach a decision to use it or not.
 
-### How much would Blockchain Automation Framework cost? How much would it cost to run Fulcurm on a cloud platform?
+### How much would Blockchain Automation Framework cost? How much would it cost to run Blockchain Automation Framework on a cloud platform?
 As an open source repository, there will be no cost at all to use the Blockchain Automation Framework. However, by running the Blockchain Automation Framework repository on a cloud platform, there might be cost by using a cloud platform and it will depend on which cloud services you are going to use.
 
 ### Who can support me during this process and answer my questions?
@@ -75,16 +80,16 @@ Please see this [page](./operations/setting_dlt.md) for detials.
 One could request a new feature on the Github repository for now. In the future, people might use Jira or Slack to do the same as well.
 
 ### Are CI/CD pipeline tools a mandatory to use the Blockchain Automation Framework?
-No, CI/CD pipeline tools like Jenkins are not mandatory, but it could help a user automate the set-up or testing of a new DLT/Blockchain network in different environments, once a user has a good understanding of using it. We have the master Jenkinsfile in `automation` folder which can be taken as a template.
+No, CI/CD pipeline tools like Jenkins are not mandatory, but it could help a user automate the set-up or testing of a new DLT/Blockchain network in different environments, once a user has a good understanding of using it. We have the main Jenkinsfile in `automation` folder which can be taken as a template.
 
 ### Is it required to run Ansible in a particular machine like AWS EC2?
 No, a user should be able to run the Ansible command on any machine as long as Ansible command CLI is installed.
 
 ### Is there an example ansible_hosts file?
-Yes, you can find an example ansible_hosts file [here](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/master/platforms/shared/inventory/ansible_provisioners). The configuration in this file means that all Ansible commands will be run in the same machine that works as both an Ansible client and server machine.
+Yes, you can find an example ansible_hosts file [here](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/main/platforms/shared/inventory/ansible_provisioners). The configuration in this file means that all Ansible commands will be run in the same machine that works as both an Ansible client and server machine.
 
 ### Can I specify the tools versions such as kubectl, helm in this project?
-Yes, you can specify tools versions like kubectl, helm, HashiCorp Vault, AWS-authenticator in the playbook [environment-setup.yaml](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/master/platforms/shared/configuration/environment-setup.yaml).
+Yes, you can specify tools versions like kubectl, helm, HashiCorp Vault, AWS-authenticator in the playbook [environment-setup.yaml](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/main/platforms/shared/configuration/environment-setup.yaml).
 
 ### How would system react if we plan to update tools versions (e.g. kubectl, helm)?
 Honestly speaking, we don't know. The latest version Blockchain Automation Framework has been tested on specific client versions of these tools, see below:
@@ -96,7 +101,7 @@ Honestly speaking, we don't know. The latest version Blockchain Automation Frame
 It is assumed that newer versions of these tools would be backward compatible, which is beyond our control. One can raise a new ticket to the Blockchain Automation Framework GitHub repository, if any major updates would break the system down.
 
 ### Why does the Flux K8s pod get a permission denied for this Blockchain Automation Framework GitHub repository?
-This usually means that the private key that you have used in your network.yaml for gitops does not have access to the GitHub repository. The corresponding public key must be added to your GitHub Account (or other git repository that you are using). Details can be found [here](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/master/platforms/shared/configuration/).
+This usually means that the private key that you have used in your network.yaml for gitops does not have access to the GitHub repository. The corresponding public key must be added to your GitHub Account (or other git repository that you are using). Details can be found [here](https://github.com/hyperledger-labs/blockchain-automation-framework/tree/main/platforms/shared/configuration/).
 
 ### Why does the flux-helm-operator keep on reporting "Failed to list *v1beta1.HelmRelease: the server could not find the requested resource (get helmreleases.flux.weave.works)"?
 The HelmRelease CustomResourceDefinition (CRD) was missing from the cluster, according to https://github.com/fluxcd/flux, the following command has to be used to deploy it:

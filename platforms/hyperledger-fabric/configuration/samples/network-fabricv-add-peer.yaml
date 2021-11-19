@@ -1,10 +1,17 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 ---
+# yaml-language-server: $schema=../../../../platforms/network-schema.json
 # This is a sample configuration file to add new Peers to existing Organizations and channels.
 network:
   # Network level configuration specifies the attributes required for each organization
   # to join an existing network.
   type: fabric
-  version: 1.4.8                 # currently tested 1.4.8 and 2.2.0
+  version: 1.4.8                 # currently tested 1.4.8 and 2.2.2
 
   frontend: enabled #Flag for frontend to enabled for nodes/peers
 
@@ -113,7 +120,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
 
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
@@ -122,15 +129,21 @@ network:
         git_url: "https://github.com/<username>/blockchain-automation-framework.git"         # Gitops https or ssh url for flux value files 
         branch: "develop"           # Git branch where release is being made
         # When adding peer on new cluster, if using same git branch, ensure release_dir is different
-        release_dir: "platforms/hyperledger-fabric/releases/dev[1/2]" # Relative Path in the Git repo for flux sync per environment. 
+        release_dir: "platforms/hyperledger-fabric/releases/dev" # Relative Path in the Git repo for flux sync per environment. 
         chart_source: "platforms/hyperledger-fabric/charts"     # Relative Path where the Helm charts are stored in Git repo
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push  (without https://)
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
 
       services:
+        ca:
+          name: ca
+          subject: "/C=GB/ST=London/L=London/O=Carrier/CN=ca.carrier-net.org3ambassador.blockchaincloudpoc.com"
+          type: ca
+          grpc:
+            port: 7054      
         # When adding peer on new cluster, ca as a service is removed
         # Ensure existing peers are listed with peerstatus = existing
         peers:
@@ -155,7 +168,7 @@ network:
             port: 3000
           chaincode:
             name: "chaincode_name"   #This has to be replaced with the name of the chaincode
-            version: "chaincode_version"   #This has to be replaced with the version of the chaincode
+            version: "1"   #This has to be replaced with the version of the chaincode
             maindirectory: "chaincode_main"    #The main directory where chaincode is needed to be placed
             repository:
               username: "git_username"          # Git Service user who has rights to check-in in all branches
@@ -186,7 +199,7 @@ network:
             port: 3000
           chaincode:
             name: "chaincode_name"   #This has to be replaced with the name of the chaincode
-            version: "chaincode_version"   #This has to be replaced with the version of the chaincode            
+            version: "1"   #This has to be replaced with the version of the chaincode            
             maindirectory: "chaincode_main"    #The main directory where chaincode is needed to be placed
             repository:
               username: "git_username"          # Git Service user who has rights to check-in in all branches
@@ -228,7 +241,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -240,7 +253,7 @@ network:
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push  (without https://)
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
      
       # Services maps to the pods that will be deployed on the k8s cluster

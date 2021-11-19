@@ -1,3 +1,9 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 # Set enode_data_list to empty
 - name: Set enode_data_list to []
   set_fact:
@@ -19,7 +25,7 @@
 # This task gets the genesis file when there isno local genesis
 - name: get genesis from vault
   shell: |
-    vault kv get -field=genesis {{ vault.secret_path | default('secret') }}/{{ component_ns }}/crypto/genesis
+    vault kv get -field=genesis {{ vault.secret_path | default('secretsv2') }}/{{ component_ns }}/crypto/genesis
   environment:
     VAULT_ADDR: "{{ vault.url }}"
     VAULT_TOKEN: "{{ vault.root_token }}"
@@ -36,7 +42,7 @@
 #This task creates the Orion Transaction Manager value files for each node of organization
 - name: Create value file for validator for each node
   include_role:
-    name: helm_component
+    name: create/helm_component
   vars:
     component_name: "{{ name }}{{ peer.name }}ibft"
     type: "validator"

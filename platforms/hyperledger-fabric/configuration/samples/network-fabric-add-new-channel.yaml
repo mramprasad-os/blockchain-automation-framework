@@ -1,10 +1,17 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
 ---
+# yaml-language-server: $schema=../../../../platforms/network-schema.json
 # This is a sample configuration file for adding a new channel to existing network.
 network:
   # Network level configuration specifies the attributes required for each organization
   # to join an existing network.
   type: fabric
-  version: 1.4.8                   # currently tested 1.4.8 and 2.2.0
+  version: 1.4.8                   # currently tested 1.4.8 and 2.2.2
 
   frontend: enabled #Flag for frontend to enabled for nodes/peers
 
@@ -25,7 +32,11 @@ network:
        - example1: example2
       deployment: {} 
       pvc: {}
-      
+  # For providing Custom Templates to generate configtx.yaml
+  configtx:
+    custom: false               # true : when custom tpls are to be provided | false : when the default tpls are to be used
+    folder_path: /home/blockchain-automation-framework/build/configtx_tpl/               # path to folder where all 4 tpls are placed e.g. /home/blockchain-automation-framework/build/configtx_tpl/ 
+
   # Docker registry details where images are stored. This will be used to create k8s secrets
   # Please ensure all required images are built and stored in this registry.
   # Do not check-in docker_password.
@@ -191,7 +202,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -203,7 +214,7 @@ network:
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push  (without https://)
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
      
       # Services maps to the pods that will be deployed on the k8s cluster
@@ -278,7 +289,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -290,7 +301,7 @@ network:
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push  (without https://)
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
 
       # The participating nodes are peers
@@ -308,7 +319,7 @@ network:
           type: anchor    # This can be anchor/nonanchor. Atleast one peer should be anchor peer.         
           gossippeeraddress: peer0.manufacturer-net:7051 # Internal Address of the other peer in same Org for gossip, same peer if there is only one peer 
           peerAddress: peer0.manufacturer-net.org3ambassador.blockchaincloudpoc.com:8443 # External URI of the peer 
-          certificate: "" # certificate path for peer
+          certificate: "/path/ca.crt" # certificate path for peer
           cli: disabled      # Creates a peer cli pod depending upon the (enabled/disabled) tag.   
           grpc:
             port: 7051         
@@ -324,7 +335,7 @@ network:
             port: 3000
           chaincode:
             name: "chaincode_name" #This has to be replaced with the name of the chaincode
-            version: "chaincode_version" #This has to be replaced with the version of the chaincode
+            version: "1" #This has to be replaced with the version of the chaincode
             maindirectory: "chaincode_main"  #The main directory where chaincode is needed to be placed
             lang: "golang"  # The language in which the chaincode is written ( golang/ java)
             repository:
@@ -366,7 +377,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -378,7 +389,7 @@ network:
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push  (without https://)
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
 
       services:
@@ -394,7 +405,7 @@ network:
           type: anchor    # This can be anchor/nonanchor. Atleast one peer should be anchor peer.    
           gossippeeraddress: peer0.carrier-net:7051 # Internal Address of the other peer in same Org for gossip, same peer if there is only one peer
           peerAddress: peer0.carrier-net.org3ambassador.blockchaincloudpoc.com:8443 # External URI of the peer
-          certificate: "" # certificate path for peer
+          certificate: "/path/ca.crt" # certificate path for peer
           cli: disabled      # Creates a peer cli pod depending upon the (enabled/disabled) tag.          
           grpc:
             port: 7051         
@@ -410,7 +421,7 @@ network:
             port: 3000
           chaincode:
             name: "chaincode_name"   #This has to be replaced with the name of the chaincode
-            version: "chaincode_version"   #This has to be replaced with the version of the chaincode
+            version: "1"   #This has to be replaced with the version of the chaincode
             maindirectory: "chaincode_main"    #The main directory where chaincode is needed to be placed
             lang: "golang"  # The language in which the chaincode is written ( golang/ java)
             repository:
@@ -451,7 +462,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -463,7 +474,7 @@ network:
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push  (without https://)
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh) 
        
       services:
@@ -479,7 +490,7 @@ network:
           type: anchor    # This can be anchor/nonanchor. Atleast one peer should be anchor peer. 
           gossippeeraddress: peer0.store-net:7051 # Internal Address of the other peer in same Org for gossip, same peer if there is only one peer 
           peerAddress: peer0.store-net.org3ambassador.blockchaincloudpoc.com:8443 # External URI of the peer
-          certificate: "" # certificate path for peer
+          certificate: "/path/ca.crt" # certificate path for peer
           cli: disabled      # Creates a peer cli pod depending upon the (enabled/disabled) tag.         
           grpc:
             port: 7051
@@ -495,7 +506,7 @@ network:
             port: 3000
           chaincode:
             name: "chaincode_name" #This has to be replaced with the name of the chaincode
-            version: "chaincode_version" #This has to be replaced with the version of the chaincode
+            version: "1" #This has to be replaced with the version of the chaincode
             maindirectory: "chaincode_main"  #The main directory where chaincode is needed to be placed
             lang: "golang"  # The language in which the chaincode is written ( golang/ java)
             repository:
@@ -537,7 +548,7 @@ network:
       vault:
         url: "vault_addr"
         root_token: "vault_root_token"
-        secret_path: "secret"
+        secret_path: "secretsv2"
       # Git Repo details which will be used by GitOps/Flux.
       # Do not check-in git_access_token
       gitops:
@@ -549,7 +560,7 @@ network:
         git_repo: "github.com/<username>/blockchain-automation-framework.git"   # Gitops git repository URL for git push  (without https://)
         username: "git_username"          # Git Service user who has rights to check-in in all branches
         password: "git_access_token"          # Git Server user password/token (Optional for ssh; Required for https)
-        email: "git_email"                # Email to use in git config
+        email: "git@email.com"                # Email to use in git config
         private_key: "path_to_private_key"          # Path to private key file which has write-access to the git repo (Optional for https; Required for ssh)
 
       services:
@@ -565,7 +576,7 @@ network:
           type: anchor    # This can be anchor/nonanchor. Atleast one peer should be anchor peer.   
           gossippeeraddress: peer0.warehouse-net:7051 # Internal Address of the other peer in same Org for gossip, same peer if there is only one peer 
           peerAddress: peer0.warehouse-net.org3ambassador.blockchaincloudpoc.com:8443 # External URI of the peer 
-          certificate: "" # certificate path for peer
+          certificate: "/path/ca.crt" # certificate path for peer
           cli: disabled      # Creates a peer cli pod depending upon the (enabled/disabled) tag.        
           grpc:
             port: 7051       
@@ -575,13 +586,13 @@ network:
             port: 5984
           restserver:
             targetPort: 20001
-            port: 20001 
+            port: 20001
           expressapi:
             targetPort: 3000
             port: 3000
           chaincode:
             name: "chaincode_name"     #This has to be replaced with the name of the chaincode
-            version: "chaincode_version"     #This has to be replaced with the version of the chaincode
+            version: "1"     #This has to be replaced with the version of the chaincode
             maindirectory: "chaincode_main"   #The main directory where chaincode is needed to be placed
             lang: "golang"  # The language in which the chaincode is written ( golang/ java)
             repository:

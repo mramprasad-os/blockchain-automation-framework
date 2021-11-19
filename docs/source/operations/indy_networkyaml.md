@@ -1,3 +1,8 @@
+[//]: # (##############################################################################################)
+[//]: # (Copyright Accenture. All Rights Reserved.)
+[//]: # (SPDX-License-Identifier: Apache-2.0)
+[//]: # (##############################################################################################)
+
 # Configuration file specification: Indy
 A network.yaml file is the base configuration file for setting up a Indy network. This file contains all the information related to the infrastructure and network specifications. Here is the structure of it.
 ![](./../_static/TopLevelClass-Indy.png)
@@ -5,6 +10,10 @@ A network.yaml file is the base configuration file for setting up a Indy network
 Before setting up a Indy network, this file needs to be updated with the required specifications.
 A sample configuration file is provide in the repo path:  
 `platforms/hyperledger-indy/configuration/samples/network-indyv3.yaml`  
+
+A json-schema definition is provided in `platforms/network-schema.json` to assist with semantic validations and lints. You can use your favorite yaml lint plugin compatible with json-schema specification, like `redhat.vscode-yaml` for VSCode. You need to adjust the directive in template located in the first line based on your actual build directory:
+
+`# yaml-language-server: $schema=../platforms/network-schema.json`
 
 The configurations are grouped in the following sections for better understanding.
 
@@ -101,8 +110,8 @@ The `genesis` section contains Information about pool transaction genesis and do
 | Field       | Description                                              |
 |-------------|----------------------------------------------------------|
 | state        | State is placeholder for future, when there will be option to join to existing cluter. Currently only "absent" is supported. That means, that genesis will be always generated    |
-| pool         | Path to pool transaction genesis. [Readme here](https://github.com/hyperledger-labs/blockchain-automation-framework/blob/master/platforms/hyperledger-indy/configuration/roles/setup/pool_genesis/).    |
-| domain | Path to domain transaction genesis. [Readme here](https://github.com/hyperledger-labs/blockchain-automation-framework/blob/master/platforms/hyperledger-indy/configuration/roles/setup/domain_genesis/).      |
+| pool         | Path to pool transaction genesis. [Readme here](https://github.com/hyperledger-labs/blockchain-automation-framework/blob/main/platforms/hyperledger-indy/configuration/roles/setup/pool_genesis/).    |
+| domain | Path to domain transaction genesis. [Readme here](https://github.com/hyperledger-labs/blockchain-automation-framework/blob/main/platforms/hyperledger-indy/configuration/roles/setup/domain_genesis/).      |
 
 
 The `organizations` section allows specification of one or many organizations that will be connecting to a network. If an organization is also hosting the root of the network (e.g. membership service, etc), then these services should be listed in this section as well.
@@ -294,7 +303,7 @@ The snapshot of endorser service with example values is below
           full_name: Some Decentralized Identity Mobile Services Provider
           avatar: https://provider.com/avatar.png
           # public endpoint will be {{ endorser.name}}.{{ external_url_suffix}}:{{endorser.server.httpPort}}
-          # Eg. In this sample https://provider-endorser.indy.blockchaincloudpoc.com:15020/
+          # E.g. In this sample https://provider-endorser.indy.blockchaincloudpoc.com:15020/
           # For minikube: http://<minikubeip>>:15020
           server:
             httpPort: 15020
