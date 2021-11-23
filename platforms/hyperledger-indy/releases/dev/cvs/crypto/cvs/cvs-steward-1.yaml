@@ -1,0 +1,32 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: cvs-cvs-steward-1
+  annotations:
+    fluxcd.io/automated: "false"
+  namespace: cvs-ns
+spec:
+  releaseName: cvs-cvs-steward-1
+  chart:
+    path: platforms/hyperledger-indy/charts/indy-key-mgmt
+    git: https://github.com/mramprasad-os/blockchain-automation-framework.git
+    ref: develop
+  values:
+    metadata:
+      name: cvs-cvs-steward-1
+      namespace: cvs-ns
+    network:
+      name: baf
+    image:
+      name: cvs
+      repository: index.docker.io/hyperledgerlabs/indy-key-mgmt:1.11.0
+      pullSecret: regcred
+    vault:
+      address: http://10.1.3.82:8200
+      version: "2"
+      keyPath: cvs.stewards
+      identity: cvs-steward-1
+      auth_path: kubernetes-cvs-admin-auth
+    account:
+      service: cvs-admin-vault-auth
+      role: rw
