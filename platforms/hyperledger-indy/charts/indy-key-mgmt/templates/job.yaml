@@ -26,7 +26,8 @@ spec:
           command: ["/bin/bash", "-c"]
           args:
             - |-
-              apt-get update && apt-get install curl -y;
+              apt-get update;
+              apt-get install curl -y;
               validateVaultResponse () {
               if [ ${1} != 200 ]; then
                echo "ERROR: Unable to retrieve. Http status: ${1}"
