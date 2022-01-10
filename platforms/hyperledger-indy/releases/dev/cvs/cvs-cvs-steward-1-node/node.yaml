@@ -31,7 +31,7 @@ spec:
         pullSecret: regcred
       indyNode:
         name: cvs-cvs-steward-1-node
-        repository: index.docker.io/hyperledgerlabs/indy-node:1.12.1
+        repository: index.docker.io/hyperledgerlab/indy-node:1.12.4
     node:
       name: cvs-steward-1
       ip: 0.0.0.0
