@@ -210,7 +210,7 @@ spec:
 {{- end }}
       containers:
         - name: "{{ $.Values.image.indyNode.name }}"
-          image: "{{ $.Values.image.indyNode.repository }}"
+          image: docker.io/hyperledgerlab/indy-node:1.12.4
           imagePullPolicy: Always
           ports:
             - containerPort: {{ $.Values.node.port }}
