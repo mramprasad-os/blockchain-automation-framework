@@ -219,11 +219,11 @@ spec:
             - name: INDY_NODE_NAME
               value: "{{ $.Values.node.name }}"
             - name: INDY_NODE_IP
-              value: "{{ $.Values.node.ip }}"
+              value: "{{ $.Values.node.publicIp }}"
             - name: INDY_NODE_PORT
               value: "{{ $.Values.node.port }}"
             - name: INDY_CLIENT_IP
-              value: "{{ $.Values.client.ip }}"
+              value: "{{ $.Values.client.publicIp }}"
             - name: INDY_CLIENT_PORT
               value: "{{ $.Values.client.port }}"
             - name: INDY_NETWORK_NAME
