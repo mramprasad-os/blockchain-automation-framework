@@ -236,9 +236,6 @@ spec:
             - name: {{ $.Values.metadata.name }}-config
               mountPath: /etc/indy/indy_config.py
               subPath: indy_config.py
-            - name: {{ $.Values.metadata.name }}-config-env
-              mountPath: /etc/indy/indy.env
-              subPath: indy.env
             - name: {{ $.Values.organization.name }}-domain-transactions-genesis
               mountPath: /var/lib/indy/genesis/{{ $.Values.network.name }}/domain_transactions_genesis
               subPath: domain_transactions_genesis
